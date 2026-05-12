@@ -1,0 +1,145 @@
+<div class="admin-bookings-container">
+  <div class="header">
+    <h2>Table Bookings Management</h2>
+    <div class="stats">
+      <span class="stat-item">
+        Total: <strong>{{ totalCount }}</strong>
+      </span>
+      <span class="stat-item">
+        Pending: <strong>{{ pendingCount }}</strong>
+      </span>
+      <span class="stat-item">
+        Confirmed: <strong>{{ confirmedCount }}</strong>
+      </span>
+    </div>
+  </div>
+
+  <div class="filters">
+    <div class="filter-row">
+      <div class="filter-group">
+        <label for="statusFilter">Status:</label>
+        <select 
+          id="statusFilter" 
+          [(ngModel)]="selectedStatus" 
+          (change)="onStatusChange()"
+          class="form-control">
+          <option *ngFor="let option of statusOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="dateFilter">Date:</label>
+        <input 
+          type="date" 
+          id="dateFilter" 
+          [(ngModel)]="selectedDate" 
+          (change)="onDateChange()"
+          class="form-control">
+      </div>
+
+      <div class="filter-group">
+        <label for="searchFilter">Search:</label>
+        <input 
+          type="text" 
+          id="searchFilter" 
+          [(ngModel)]="searchTerm" 
+          (input)="onSearchChange()"
+          placeholder="Search by name or email..."
+          class="form-control">
+      </div>
+    </div>
+  </div>
+
+  <div class="loading" *ngIf="loading">
+    Loading bookings...
+  </div>
+
+  <div class="no-results" *ngIf="!loading && filteredBookings.length === 0">
+    <p>No bookings found matching your criteria.</p>
+  </div>
+
+  <div class="bookings-table-container" *ngIf="!loading && filteredBookings.length > 0">
+    <table class="bookings-table">
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>Contact</th>
+          <th>Date & Time</th>
+          <th>Guests</th>
+          <th>Table Details</th>
+          <th>Payment Amount</th>
+          <th>Status</th>
+          <th>Created</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let booking of filteredBookings">
+          <td>
+            <div class="customer-info">
+              <strong>{{ booking.customerName }}</strong>
+              <small *ngIf="booking.userId">(Registered User)</small>
+            </div>
+          </td>
+          <td>
+            <div class="contact-info">
+              <div>{{ booking.customerEmail }}</div>
+              <div>{{ booking.customerPhone }}</div>
+            </div>
+          </td>
+          <td>
+            <div class="datetime-info">
+              <div class="date">{{ formatDate(booking.date) }}</div>
+              <div class="time">{{ booking.time }}</div>
+            </div>
+          </td>
+          <td class="text-center">{{ booking.numberOfGuests }}</td>
+          <td>
+            <div class="table-info">
+              <span class="table-type" [class]="booking.tableType">
+                {{ booking.tableType }}
+              </span>
+              <div class="table-number-badge">
+                <span *ngFor="let num of booking.tableNumbers; let last = last">
+                  Table #{{ num }}{{ last ? '' : ', ' }}
+                </span>
+              </div>
+            </div>
+          </td>
+          <td class="text-center">
+            <div class="payment-amount">
+              <strong>₹{{ booking.numberOfGuests * 50 }}</strong>
+              <small>({{ booking.numberOfGuests }} × ₹50)</small>
+            </div>
+          </td>
+          <td>
+            <span class="status-badge" [class]="getStatusClass(booking.status!)">
+              {{ booking.status }}
+            </span>
+          </td>
+          <td>{{ formatDateTime(booking.createdAt!) }}</td>
+          <td>
+            <div class="actions">
+              <select 
+                *ngIf="booking.status !== 'cancel'"
+                (change)="updateBookingStatus(booking._id!, $any($event.target).value)"
+                class="status-select">
+                <option value="">Change Status</option>
+                <option value="confirm" *ngIf="canChangeToStatus(booking.status, 'confirm')">Confirm</option>
+                <option value="cancel" *ngIf="canChangeToStatus(booking.status, 'cancel')">Cancel</option>
+              </select>
+              <button 
+                class="btn btn-danger btn-sm" 
+                (click)="deleteBooking(booking._id!)"
+                title="Delete Booking">
+                Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

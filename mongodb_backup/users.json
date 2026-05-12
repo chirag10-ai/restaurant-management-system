@@ -1,0 +1,13 @@
+[
+  {
+    "_id": "69d2a42aef2d46b106725e70",
+    "name": "chirag",
+    "email": "chiku10@gmail.com",
+    "password": "$2b$10$RRalFi4hAYNTqz5J9bb.le4QdhFvlzOQ/r3/bZm/KmPOUpdVNBzMe",
+    "role": "customer",
+    "isActive": true,
+    "createdAt": "2026-04-05T18:04:26.370Z",
+    "updatedAt": "2026-04-05T18:04:26.370Z",
+    "__v": 0
+  }
+]

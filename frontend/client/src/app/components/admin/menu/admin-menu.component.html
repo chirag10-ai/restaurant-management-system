@@ -1,0 +1,112 @@
+<div class="menu-container">
+  <div class="header">
+    <h2>Menu Management</h2>
+    <button class="btn btn-primary" (click)="toggleForm()" *ngIf="!showForm" [disabled]="loading">Add New Item</button>
+    <button class="btn btn-secondary" (click)="cancelEdit()" *ngIf="showForm">Cancel</button>
+  </div>
+  
+  <div class="loading" *ngIf="loading">
+    Loading menu items...
+  </div>
+  
+  <div class="success-message" *ngIf="!loading && menuItems.length === 0">
+    No menu items found. Add your first item!
+  </div>
+
+  <!-- Menu Form -->
+  <div class="form-container" *ngIf="showForm">
+    <h3>{{ editingItem ? 'Edit Menu Item' : 'Add New Menu Item' }}</h3>
+    <form [formGroup]="menuForm" (ngSubmit)="submitForm()">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Name *</label>
+          <input type="text" id="name" formControlName="name">
+          <div class="error" *ngIf="menuForm.get('name')?.invalid && menuForm.get('name')?.touched">
+            Name is required and must be at least 2 characters
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="price">Price *</label>
+          <input type="number" id="price" formControlName="price" min="0" step="0.01">
+          <div class="error" *ngIf="menuForm.get('price')?.invalid && menuForm.get('price')?.touched">
+            Price is required and must be positive
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="image">Upload Photo</label>
+        <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*">
+        <div class="file-info" *ngIf="selectedFile">Selected: {{ selectedFile.name }}</div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description *</label>
+        <textarea id="description" formControlName="description" rows="3"></textarea>
+        <div class="error" *ngIf="menuForm.get('description')?.invalid && menuForm.get('description')?.touched">
+          Description is required and must be at least 10 characters
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="isAvailable">Item Available *</label>
+        <select id="isAvailable" formControlName="isAvailable">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+        <div class="error" *ngIf="menuForm.get('isAvailable')?.invalid && menuForm.get('isAvailable')?.touched">
+          Please select availability status
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="menuForm.invalid">
+        {{ editingItem ? 'Update Item' : 'Add Item' }}
+      </button>
+    </form>
+  </div>
+
+  <!-- Menu Items Table -->
+  <div class="table-container" *ngIf="!loading">
+    <div class="table-header">
+      <h3>Current Menu Items ({{ menuItems.length }})</h3>
+    </div>
+    <table class="menu-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Available</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of menuItems">
+          <td>
+            <div class="item-name-cell">
+              <span>{{ item.name }}</span>
+              <div class="item-image-preview" *ngIf="item.image">
+                <img [src]="getImageUrl(item.image)" [alt]="item.name" />
+              </div>
+            </div>
+          </td>
+          <td>{{ item.description }}</td>
+          <td>${{ item.price }}</td>
+          <td>
+            <span class="status-badge" [class.active]="item.isAvailable" [class.inactive]="!item.isAvailable">
+              {{ item.isAvailable ? 'Yes' : 'No' }}
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-edit" (click)="editItem(item)">Edit</button>
+            <button class="btn btn-sm btn-toggle" (click)="toggleAvailability(item)">
+              {{ item.isAvailable ? 'Hide' : 'Show' }}
+            </button>
+            <button class="btn btn-sm btn-delete" (click)="deleteItem(item._id!)" *ngIf="item._id">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

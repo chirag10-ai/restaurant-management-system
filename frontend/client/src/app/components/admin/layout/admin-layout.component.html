@@ -1,0 +1,45 @@
+<div class="admin-container">
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.open]="sidebarOpen">
+    <div class="sidebar-header">
+      <h2>Admin Panel</h2>
+      <button class="toggle-btn" (click)="toggleSidebar()">×</button>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a routerLink="/admin/dashboard" routerLinkActive="active"><i class="icon-dashboard"></i> Dashboard</a></li>
+        <li><a routerLink="/admin/menu" routerLinkActive="active"><i class="icon-menu"></i> Menu Items</a></li>
+        <li><a routerLink="/admin/bookings" routerLinkActive="active"><i class="icon-bookings"></i>📅 Table Bookings</a></li>
+        <li><a routerLink="/admin/orders" routerLinkActive="active"><i class="icon-orders"></i>🛒 Orders</a></li>
+        <li><a routerLink="/admin/contacts" routerLinkActive="active"><i class="icon-contacts"></i>📩 Contact Messages</a></li>
+        <li><a routerLink="/admin/users" routerLinkActive="active"><i class="icon-users"></i> Users</a></li>
+        <li><a routerLink="/admin/revenue" routerLinkActive="active"><i class="icon-revenue"></i> 💰 Revenue</a></li>
+        <li><a routerLink="/admin/user-profiles" routerLinkActive="active"><i class="icon-users"></i> 👥 User Profiles</a></li>
+      </ul>
+    </nav>
+    
+    <div class="sidebar-user">
+      <div class="user-info">
+        <span class="user-name">{{ currentUser?.name }}</span>
+        <span class="user-role">{{ currentUser?.role }}</span>
+      </div>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </aside>
+  
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="topbar">
+      <button class="menu-toggle" (click)="toggleSidebar()">☰</button>
+      <div class="brand">
+        <img *ngIf="brandLogoUrl" [src]="brandLogoUrl" alt="TastyBite" class="brand-logo" (error)="onBrandLogoError()">
+        <h1>TastyBite Admin</h1>
+      </div>
+    </header>
+    
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

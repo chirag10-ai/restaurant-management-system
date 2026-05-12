@@ -1,0 +1,106 @@
+<div class="admin-contacts-container">
+  <div class="header">
+    <h2>Contact Messages</h2>
+    <div class="stats">
+      <span class="stat-item">
+        Total: <strong>{{ totalCount }}</strong>
+      </span>
+      <span class="stat-item">
+        New: <strong>{{ newCount }}</strong>
+      </span>
+      <span class="stat-item">
+        Replied: <strong>{{ repliedCount }}</strong>
+      </span>
+    </div>
+  </div>
+
+  <div class="filters">
+    <div class="filter-row">
+      <div class="filter-group">
+        <label for="statusFilter">Status:</label>
+        <select 
+          id="statusFilter" 
+          [(ngModel)]="selectedStatus" 
+          (change)="onStatusChange()"
+          class="form-control">
+          <option *ngFor="let option of statusOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="searchFilter">Search:</label>
+        <input 
+          type="text" 
+          id="searchFilter" 
+          [(ngModel)]="searchTerm" 
+          (input)="onSearchChange()"
+          placeholder="Search by name, email, or subject..."
+          class="form-control">
+      </div>
+    </div>
+  </div>
+
+  <div class="loading" *ngIf="loading">
+    Loading messages...
+  </div>
+
+  <div class="no-results" *ngIf="!loading && filteredMessages.length === 0">
+    <p>No messages found matching your criteria.</p>
+  </div>
+
+  <div class="messages-table-container" *ngIf="!loading && filteredMessages.length > 0">
+    <table class="messages-table">
+      <thead>
+        <tr>
+          <th>From</th>
+          <th>Subject</th>
+          <th>Message</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let message of filteredMessages">
+          <td>
+            <div class="sender-info">
+              <strong>{{ message.name }}</strong>
+              <div>{{ message.email }}</div>
+            </div>
+          </td>
+          <td>{{ message.subject }}</td>
+          <td class="message-preview">
+            {{ message.message.substring(0, 100) }}{{ message.message.length > 100 ? '...' : '' }}
+          </td>
+          <td>
+            <span class="status-badge" [class]="getStatusClass(message.status!)">
+              {{ message.status }}
+            </span>
+          </td>
+          <td>{{ formatDate(message.createdAt!) }}</td>
+          <td>
+            <div class="actions">
+              <select 
+                (change)="updateMessageStatus(message._id!, $any($event.target).value)"
+                class="status-select">
+                <option value="">Change Status</option>
+                <option value="new" *ngIf="canChangeToStatus(message.status, 'new')">Mark as New</option>
+                <option value="read" *ngIf="canChangeToStatus(message.status, 'read')">Mark as Read</option>
+                <option value="replied" *ngIf="canChangeToStatus(message.status, 'replied')">Mark as Replied</option>
+                <option value="closed" *ngIf="canChangeToStatus(message.status, 'closed')">Close Message</option>
+              </select>
+              <button 
+                class="btn btn-danger btn-sm" 
+                (click)="deleteMessage(message._id!)"
+                title="Delete Message">
+                Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

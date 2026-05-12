@@ -1,0 +1,45 @@
+<div class="menu-page">
+  <header class="menu-header">
+    <h1>Our Menu</h1>
+    <p>Discover our delicious dishes crafted with care</p>
+  </header>
+
+  <div class="loading" *ngIf="loading">
+    Loading menu items...
+  </div>
+
+  <div class="menu-grid" *ngIf="!loading && menuItems.length > 0">
+    <div class="menu-item" *ngFor="let item of menuItems">
+      <div class="item-image" *ngIf="item.image">
+        <img [src]="getImageUrl(item.image)" [alt]="item.name" />
+      </div>
+      <div class="item-details">
+        <h3 class="item-name">{{ item.name }}</h3>
+        <p class="item-description">{{ item.description }}</p>
+        <div class="item-footer">
+          <span class="item-price">₹{{ item.price }}</span>
+          <span class="item-status unavailable" *ngIf="!item.isAvailable">Unavailable</span>
+        </div>
+        
+        <!-- Quantity selector -->
+        <div class="quantity-selector" *ngIf="item.isAvailable">
+          <button class="quantity-btn" (click)="updateQuantity(item._id!, -1)" [disabled]="itemQuantities[item._id!] <= 0">-</button>
+          <span class="quantity-display">{{ itemQuantities[item._id!] || 0 }}</span>
+          <button class="quantity-btn" (click)="updateQuantity(item._id!, 1)">+</button>
+          <button class="add-to-cart-btn" (click)="addToCart(item)" [disabled]="itemQuantities[item._id!] <= 0">Add to Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="!loading && menuItems.length === 0">
+    <p>No menu items available at the moment. Please check back later!</p>
+  </div>
+  
+  <!-- Table Booking Button -->
+  <div class="booking-button-container" *ngIf="!loading && menuItems.length > 0">
+    <button class="booking-btn" (click)="goToBooking()">Continue to Table Booking</button>
+    <!-- Order Only Button -->
+    <button class="order-only-btn" (click)="goToPayment()">Place Order Only (No Table Booking)</button>
+  </div>
+</div>

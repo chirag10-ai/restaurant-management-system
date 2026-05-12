@@ -1,0 +1,55 @@
+<div class="users-container">
+  <h2>All Users Management</h2>
+  
+  <!-- Loading indicator -->
+  <div *ngIf="loading" class="loading">
+    Loading users...
+  </div>
+  
+  <!-- Error message -->
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+  
+  <!-- Users table -->
+  <div class="table-container" *ngIf="!loading && !error">
+    <table class="users-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Created Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredUsers">
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <span class="role-badge" [class]="getUserRoleClass(user.role)">{{ user.role }}</span>
+          </td>
+          <td>
+            <span class="status-badge" [class.active]="user.isActive" [class.inactive]="!user.isActive">
+              {{ user.isActive ? 'Active' : 'Inactive' }}
+            </span>
+          </td>
+          <td>{{ user.createdAt | date:'mediumDate' }}</td>
+          <td>
+            <div class="actions">
+              <button class="btn btn-sm btn-toggle" (click)="toggleUserStatus(user.id)">
+                {{ user.isActive ? 'Deactivate' : 'Activate' }}
+              </button>
+              <button class="btn btn-sm btn-delete" (click)="deleteUser(user.id)">Delete</button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="filteredUsers.length === 0">
+          <td colspan="6" class="no-data">No users found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

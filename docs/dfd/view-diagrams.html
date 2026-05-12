@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Management System - Diagrams</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        h2 {
+            color: #4f79c7;
+            border-bottom: 2px solid #4f79c7;
+            padding-bottom: 10px;
+        }
+        .diagram-container {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .legend {
+            background: #e8f0fe;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>📊 Restaurant Management System - Diagrams</h1>
+    
+    <div class="diagram-container">
+        <h2>1. DFD Level 0 (Context Diagram)</h2>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+            <rect width="800" height="600" fill="#f5f5f5"/>
+            <text x="400" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333">DFD Level 0 - Restaurant Management System</text>
+            <rect x="50" y="200" width="120" height="80" fill="#4a90d9" stroke="#2c5a8c" stroke-width="2" rx="5"/>
+            <text x="110" y="245" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white" font-weight="bold">Customer</text>
+            <rect x="50" y="350" width="120" height="80" fill="#4a90d9" stroke="#2c5a8c" stroke-width="2" rx="5"/>
+            <text x="110" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white" font-weight="bold">Admin</text>
+            <circle cx="400" cy="300" r="100" fill="#4a90d9" stroke="#2c5a8c" stroke-width="3"/>
+            <text x="400" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="white" font-weight="bold">Restaurant</text>
+            <text x="400" y="315" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="white" font-weight="bold">Management</text>
+            <text x="400" y="335" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white">System</text>
+            <ellipse cx="650" cy="220" rx="80" ry="40" fill="#4a90d9" stroke="#2c5a8c" stroke-width="2"/>
+            <ellipse cx="650" cy="200" rx="80" ry="40" fill="#5ba0e9" stroke="#2c5a8c" stroke-width="2"/>
+            <text x="650" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white" font-weight="bold">Database</text>
+            <ellipse cx="650" cy="380" rx="80" ry="40" fill="#4a90d9" stroke="#2c5a8c" stroke-width="2"/>
+            <ellipse cx="650" cy="360" rx="80" ry="40" fill="#5ba0e9" stroke="#2c5a8c" stroke-width="2"/>
+            <text x="650" y="385" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white" font-weight="bold">File Storage</text>
+            <defs>
+                <marker id="arrowhead1" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                </marker>
+            </defs>
+            <line x1="170" y1="230" x2="300" y2="270" stroke="#333" stroke-width="2" marker-end="url(#arrowhead1)"/>
+            <text x="220" y="245" font-family="Arial, sans-serif" font-size="11" fill="#333">Order Request</text>
+            <line x1="300" y1="290" x2="170" y2="250" stroke="#333" stroke-width="2" marker-end="url(#arrowhead1)"/>
+            <text x="220" y="275" font-family="Arial, sans-serif" font-size="11" fill="#333">Order Confirmation</text>
+            <line x1="170" y1="380" x2="300" y2="330" stroke="#333" stroke-width="2" marker-end="url(#arrowhead1)"/>
+            <text x="210" y="365" font-family="Arial, sans-serif" font-size="11" fill="#333">Manage Data</text>
+            <line x1="300" y1="350" x2="170" y2="400" stroke="#333" stroke-width="2" marker-end="url(#arrowhead1)"/>
+            <text x="210" y="385" font-family="Arial, sans-serif" font-size="11" fill="#333">Reports</text>
+            <line x1="500" y1="270" x2="570" y2="220" stroke="#333" stroke-width="2" marker-end="url(#arrowhead1)"/>
+            <text x="530" y="235" font-family="Arial, sans-serif" font-size="11" fill="#333">Store/Retrieve</text>
+            <line x1="500" y1="330" x2="570" y2="380" stroke="#333" stroke-width="2" marker-end="url(#arrowhead1)"/>
+            <text x="520" y="365" font-family="Arial, sans-serif" font-size="11" fill="#333">Upload/Retrieve</text>
+        </svg>
+    </div>
+
+    <div class="diagram-container">
+        <h2>2. Task Dependency Diagram</h2>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" width="1000" height="700">
+            <rect width="1000" height="700" fill="#f8fafc"/>
+            <text x="500" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1f2937">Task Dependency Diagram - Restaurant Management System</text>
+            <defs>
+                <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+                    <polygon points="0,0 12,6 0,12" fill="#274b87"/>
+                </marker>
+                <marker id="depArrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+                    <polygon points="0,0 12,6 0,12" fill="#dc2626"/>
+                </marker>
+            </defs>
+            <rect x="50" y="80" width="180" height="60" fill="#4f79c7" stroke="#274b87" stroke-width="3" rx="8"/>
+            <text x="140" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white" font-weight="bold">1. Project Setup</text>
+            <text x="140" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Initialize Structure</text>
+            <ellipse cx="390" cy="95" rx="90" ry="25" fill="#4f79c7" stroke="#274b87" stroke-width="3"/>
+            <rect x="300" y="95" width="180" height="50" fill="#4f79c7" stroke="#274b87" stroke-width="3"/>
+            <ellipse cx="390" cy="145" rx="90" ry="25" fill="#4f79c7" stroke="#274b87" stroke-width="3"/>
+            <text x="390" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white" font-weight="bold">2. Database</text>
+            <text x="390" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">MongoDB Schema</text>
+            <circle cx="640" cy="110" r="55" fill="#4f79c7" stroke="#274b87" stroke-width="3"/>
+            <text x="640" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white" font-weight="bold">3. Backend</text>
+            <text x="640" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Node.js API</text>
+            <rect x="800" y="80" width="180" height="60" fill="#4f79c7" stroke="#274b87" stroke-width="3" rx="8"/>
+            <text x="890" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white" font-weight="bold">4. Frontend UI</text>
+            <text x="890" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Angular Components</text>
+            <rect x="50" y="200" width="120" height="50" fill="#93bbfc" stroke="#4f79c7" stroke-width="2" rx="5"/>
+            <text x="110" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1f2937" font-weight="bold">1.1 Folder</text>
+            <text x="110" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1f2937">Structure</text>
+            <rect x="190" y="200" width="120" height="50" fill="#93bbfc" stroke="#4f79c7" stroke-width="2" rx="5"/>
+            <text x="250" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1f2937" font-weight="bold">1.2 Git Init</text>
+            <text x="250" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1f2937">Initialize</text>
+            <ellipse cx="390" cy="215" rx="55" ry="15" fill="#93bbfc" stroke="#4f79c7" stroke-width="2"/>
+            <rect x="335" y="215" width="110" height="35" fill="#93bbfc" stroke="#4f79c7" stroke-width="2"/>
+            <ellipse cx="390" cy="250" rx="55" ry="15" fill="#93bbfc" stroke="#4f79c7" stroke-width="2"/>
+            <text x="390" y="230" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#1f2937" font-weight="bold">2.1 User Model</text>
+            <ellipse cx="550" cy="215" rx="55" ry="15" fill="#93bbfc" stroke="#4f79c7" stroke-width="2"/>
+            <rect x="495" y="215" width="110" height="35" fill="#93bbfc" stroke="#4f79c7" stroke-width="2"/>
+            <ellipse cx="550" cy="250" rx="55" ry="15" fill="#93bbfc" stroke="#4f79c7" stroke-width="2"/>
+            <text x="550" y="230" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#1f2937" font-weight="bold">2.2 Menu Model</text>
+            <circle cx="640" cy="230" r="35" fill="#93bbfc" stroke="#4f79c7" stroke-width="2"/>
+            <text x="640" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#1f2937" font-weight="bold">3.1 Auth</text>
+            <text x="640" y="238" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#1f2937">API</text>
+            <circle cx="760" cy="230" r="35" fill="#93bbfc" stroke="#4f79c7" stroke-width="2"/>
+            <text x="760" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#1f2937" font-weight="bold">3.2 Menu</text>
+            <text x="760" y="238" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#1f2937">API</text>
+            <circle cx="880" cy="230" r="35" fill="#93bbfc" stroke="#4f79c7" stroke-width="2"/>
+            <text x="880" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#1f2937" font-weight="bold">3.3 Order</text>
+            <text x="880" y="238" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#1f2937">API</text>
+            <rect x="50" y="320" width="120" height="50" fill="#93bbfc" stroke="#4f79c7" stroke-width="2" rx="5"/>
+            <text x="110" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1f2937" font-weight="bold">4.1 Login Page</text>
+            <text x="110" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1f2937">& Auth Guard</text>
+            <rect x="190" y="320" width="120" height="50" fill="#93bbfc" stroke="#4f79c7" stroke-width="2" rx="5"/>
+            <text x="250" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1f2937" font-weight="bold">4.2 Menu</text>
+            <text x="250" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1f2937">Display & Cart</text>
+            <rect x="330" y="320" width="120" height="50" fill="#93bbfc" stroke="#4f79c7" stroke-width="2" rx="5"/>
+            <text x="390" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1f2937" font-weight="bold">4.3 Order</text>
+            <text x="390" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1f2937">Management</text>
+            <rect x="470" y="320" width="120" height="50" fill="#93bbfc" stroke="#4f79c7" stroke-width="2" rx="5"/>
+            <text x="530" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1f2937" font-weight="bold">4.4 Booking</text>
+            <text x="530" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1f2937">System</text>
+            <rect x="610" y="320" width="120" height="50" fill="#93bbfc" stroke="#4f79c7" stroke-width="2" rx="5"/>
+            <text x="670" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1f2937" font-weight="bold">4.5 Admin</text>
+            <text x="670" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1f2937">Dashboard</text>
+            <rect x="750" y="320" width="120" height="50" fill="#93bbfc" stroke="#4f79c7" stroke-width="2" rx="5"/>
+            <text x="810" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1f2937" font-weight="bold">4.6 Payment</text>
+            <text x="810" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1f2937">Integration</text>
+            <ellipse cx="110" cy="435" rx="50" ry="12" fill="#93bbfc" stroke="#4f79c7" stroke-width="2"/>
+            <rect x="60" y="435" width="100" height="35" fill="#93bbfc" stroke="#4f79c7" stroke-width="2"/>
+            <ellipse cx="110" cy="470" rx="50" ry="12" fill="#93bbfc" stroke="#4f79c7" stroke-width="2"/>
+            <text x="110" y="455" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#1f2937" font-weight="bold">5.1 Testing</text>
+            <ellipse cx="250" cy="435" rx="50" ry="12" fill="#93bbfc" stroke="#4f79c7" stroke-width="2"/>
+            <rect x="200" y="435" width="100" height="35" fill="#93bbfc" stroke="#4f79c7" stroke-width="2"/>
+            <ellipse cx="250" cy="470" rx="50" ry="12" fill="#93bbfc" stroke="#4f79c7" stroke-width="2"/>
+            <text x="250" y="455" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#1f2937" font-weight="bold">5.2 Backup</text>
+            <ellipse cx="390" cy="435" rx="50" ry="12" fill="#93bbfc" stroke="#4f79c7" stroke-width="2"/>
+            <rect x="340" y="435" width="100" height="35" fill="#93bbfc" stroke="#4f79c7" stroke-width="2"/>
+            <ellipse cx="390" cy="470" rx="50" ry="12" fill="#93bbfc" stroke="#4f79c7" stroke-width="2"/>
+            <text x="390" y="455" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#1f2937" font-weight="bold">5.3 Docs</text>
+            <line x1="230" y1="110" x2="300" y2="110" stroke="#dc2626" stroke-width="3" marker-end="url(#depArrow)"/>
+            <line x1="480" y1="110" x2="585" y2="110" stroke="#dc2626" stroke-width="3" marker-end="url(#depArrow)"/>
+            <line x1="695" y1="110" x2="800" y2="110" stroke="#dc2626" stroke-width="3" marker-end="url(#depArrow)"/>
+            <line x1="170" y1="225" x2="190" y2="225" stroke="#dc2626" stroke-width="2" marker-end="url(#depArrow)"/>
+            <line x1="310" y1="225" x2="335" y2="225" stroke="#dc2626" stroke-width="2" marker-end="url(#depArrow)"/>
+            <line x1="445" y1="225" x2="495" y2="225" stroke="#dc2626" stroke-width="2" marker-end="url(#depArrow)"/>
+            <line x1="675" y1="230" x2="725" y2="230" stroke="#dc2626" stroke-width="2" marker-end="url(#depArrow)"/>
+            <line x1="795" y1="230" x2="845" y2="230" stroke="#dc2626" stroke-width="2" marker-end="url(#depArrow)"/>
+            <line x1="640" y1="265" x2="110" y2="320" stroke="#dc2626" stroke-width="2" marker-end="url(#depArrow)"/>
+            <line x1="760" y1="265" x2="250" y2="320" stroke="#dc2626" stroke-width="2" marker-end="url(#depArrow)"/>
+            <line x1="880" y1="265" x2="390" y2="320" stroke="#dc2626" stroke-width="2" marker-end="url(#depArrow)"/>
+            <line x1="170" y1="345" x2="190" y2="345" stroke="#dc2626" stroke-width="2" marker-end="url(#depArrow)"/>
+            <line x1="310" y1="345" x2="330" y2="345" stroke="#dc2626" stroke-width="2" marker-end="url(#depArrow)"/>
+            <line x1="450" y1="345" x2="470" y2="345" stroke="#dc2626" stroke-width="2" marker-end="url(#depArrow)"/>
+            <line x1="590" y1="345" x2="610" y2="345" stroke="#dc2626" stroke-width="2" marker-end="url(#depArrow)"/>
+            <line x1="730" y1="345" x2="750" y2="345" stroke="#dc2626" stroke-width="2" marker-end="url(#depArrow)"/>
+            <line x1="390" y1="370" x2="110" y2="435" stroke="#dc2626" stroke-width="2" marker-end="url(#depArrow)"/>
+            <line x1="810" y1="370" x2="250" y2="435" stroke="#dc2626" stroke-width="2" marker-end="url(#depArrow)"/>
+            <line x1="160" y1="470" x2="200" y2="470" stroke="#dc2626" stroke-width="2" marker-end="url(#depArrow)"/>
+            <line x1="300" y1="470" x2="340" y2="470" stroke="#dc2626" stroke-width="2" marker-end="url(#depArrow)"/>
+            <rect x="750" y="520" width="220" height="160" fill="white" stroke="#274b87" stroke-width="2" rx="5"/>
+            <text x="860" y="545" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1f2937">Legend</text>
+            <rect x="760" y="555" width="30" height="20" fill="#4f79c7" stroke="#274b87" stroke-width="2" rx="3"/>
+            <text x="800" y="570" font-family="Arial, sans-serif" font-size="10" fill="#1f2937">Phase</text>
+            <rect x="760" y="585" width="30" height="15" fill="#93bbfc" stroke="#4f79c7" stroke-width="2" rx="3"/>
+            <text x="800" y="597" font-family="Arial, sans-serif" font-size="10" fill="#1f2937">Sub-task</text>
+            <line x1="760" y1="620" x2="790" y2="620" stroke="#dc2626" stroke-width="3" marker-end="url(#depArrow)"/>
+            <text x="800" y="625" font-family="Arial, sans-serif" font-size="10" fill="#1f2937">Depends on</text>
+            <text x="860" y="660" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#4b5563" font-style="italic">Red arrows show dependencies</text>
+        </svg>
+    </div>
+
+    <div class="legend">
+        <h3>📋 DFD Symbols Guide:</h3>
+        <ul>
+            <li><strong>Square (Rectangle):</strong> External Entity / Phase</li>
+            <li><strong>Circle:</strong> Process / Task</li>
+            <li><strong>Cylinder:</strong> Data Store</li>
+            <li><strong>Arrow:</strong> Data Flow / Dependency</li>
+        </ul>
+    </div>
+    <div class="diagram-container">
+        <h2>3. ER Diagram (Entity Relationship)</h2>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1000" height="750">
+            <rect width="1200" height="900" fill="#f8fafc"/>
+            <text x="600" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#1f2937">ER Diagram - Restaurant Management System</text>
+            <defs>
+                <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+                    <polygon points="0,0 12,6 0,12" fill="#274b87"/>
+                </marker>
+                <marker id="arrowMany" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+                    <polygon points="0,0 12,6 0,12" fill="#dc2626"/>
+                </marker>
+            </defs>
+            <rect x="50" y="100" width="200" height="180" fill="#4f79c7" stroke="#274b87" stroke-width="3" rx="10"/>
+            <text x="150" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="white" font-weight="bold">👤 USER</text>
+            <circle cx="80" cy="155" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="95" y="160" font-family="Arial, sans-serif" font-size="11" fill="white">_id (PK)</text>
+            <circle cx="80" cy="175" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="95" y="180" font-family="Arial, sans-serif" font-size="11" fill="white">name</text>
+            <circle cx="80" cy="195" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="95" y="200" font-family="Arial, sans-serif" font-size="11" fill="white">email</text>
+            <circle cx="80" cy="215" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="95" y="220" font-family="Arial, sans-serif" font-size="11" fill="white">password</text>
+            <circle cx="80" cy="235" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="95" y="240" font-family="Arial, sans-serif" font-size="11" fill="white">role</text>
+            <circle cx="80" cy="255" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="95" y="260" font-family="Arial, sans-serif" font-size="11" fill="white">isActive</text>
+            <rect x="500" y="100" width="200" height="180" fill="#4f79c7" stroke="#274b87" stroke-width="3" rx="10"/>
+            <text x="600" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="white" font-weight="bold">🍽️ MENU</text>
+            <circle cx="530" cy="155" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="545" y="160" font-family="Arial, sans-serif" font-size="11" fill="white">_id (PK)</text>
+            <circle cx="530" cy="175" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="545" y="180" font-family="Arial, sans-serif" font-size="11" fill="white">name</text>
+            <circle cx="530" cy="195" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="545" y="200" font-family="Arial, sans-serif" font-size="11" fill="white">description</text>
+            <circle cx="530" cy="215" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="545" y="220" font-family="Arial, sans-serif" font-size="11" fill="white">price</text>
+            <circle cx="530" cy="235" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="545" y="240" font-family="Arial, sans-serif" font-size="11" fill="white">image</text>
+            <circle cx="530" cy="255" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="545" y="260" font-family="Arial, sans-serif" font-size="11" fill="white">isAvailable</text>
+            <rect x="950" y="100" width="200" height="200" fill="#4f79c7" stroke="#274b87" stroke-width="3" rx="10"/>
+            <text x="1050" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="white" font-weight="bold">📋 ORDER</text>
+            <circle cx="980" cy="155" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="995" y="160" font-family="Arial, sans-serif" font-size="11" fill="white">_id (PK)</text>
+            <circle cx="980" cy="175" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="995" y="180" font-family="Arial, sans-serif" font-size="11" fill="white">userId (FK)</text>
+            <circle cx="980" cy="195" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="995" y="200" font-family="Arial, sans-serif" font-size="11" fill="white">items[]</text>
+            <circle cx="980" cy="215" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="995" y="220" font-family="Arial, sans-serif" font-size="11" fill="white">totalPrice</text>
+            <circle cx="980" cy="235" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="995" y="240" font-family="Arial, sans-serif" font-size="11" fill="white">status</text>
+            <circle cx="980" cy="255" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="995" y="260" font-family="Arial, sans-serif" font-size="11" fill="white">tableNumber</text>
+            <circle cx="980" cy="275" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="995" y="280" font-family="Arial, sans-serif" font-size="11" fill="white">notes</text>
+            <rect x="50" y="450" width="200" height="220" fill="#4f79c7" stroke="#274b87" stroke-width="3" rx="10"/>
+            <text x="150" y="480" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="white" font-weight="bold">📅 BOOKING</text>
+            <circle cx="80" cy="505" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="95" y="510" font-family="Arial, sans-serif" font-size="11" fill="white">_id (PK)</text>
+            <circle cx="80" cy="525" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="95" y="530" font-family="Arial, sans-serif" font-size="11" fill="white">customerName</text>
+            <circle cx="80" cy="545" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="95" y="550" font-family="Arial, sans-serif" font-size="11" fill="white">customerEmail</text>
+            <circle cx="80" cy="565" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="95" y="570" font-family="Arial, sans-serif" font-size="11" fill="white">customerPhone</text>
+            <circle cx="80" cy="585" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="95" y="590" font-family="Arial, sans-serif" font-size="11" fill="white">date/time</text>
+            <circle cx="80" cy="605" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="95" y="610" font-family="Arial, sans-serif" font-size="11" fill="white">guests</text>
+            <circle cx="80" cy="625" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="95" y="630" font-family="Arial, sans-serif" font-size="11" fill="white">tableNumbers[]</text>
+            <circle cx="80" cy="645" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="95" y="650" font-family="Arial, sans-serif" font-size="11" fill="white">status</text>
+            <rect x="500" y="450" width="200" height="200" fill="#4f79c7" stroke="#274b87" stroke-width="3" rx="10"/>
+            <text x="600" y="480" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="white" font-weight="bold">💳 PAYMENT</text>
+            <circle cx="530" cy="505" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="545" y="510" font-family="Arial, sans-serif" font-size="11" fill="white">_id (PK)</text>
+            <circle cx="530" cy="525" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="545" y="530" font-family="Arial, sans-serif" font-size="11" fill="white">orderId (FK)</text>
+            <circle cx="530" cy="545" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="545" y="550" font-family="Arial, sans-serif" font-size="11" fill="white">userId (FK)</text>
+            <circle cx="530" cy="565" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="545" y="570" font-family="Arial, sans-serif" font-size="11" fill="white">amount</text>
+            <circle cx="530" cy="585" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="545" y="590" font-family="Arial, sans-serif" font-size="11" fill="white">paymentMethod</text>
+            <circle cx="530" cy="605" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="545" y="610" font-family="Arial, sans-serif" font-size="11" fill="white">paymentStatus</text>
+            <circle cx="530" cy="625" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+            <text x="545" y="630" font-family="Arial, sans-serif" font-size="11" fill="white">transactionId</text>
+            <ellipse cx="350" cy="200" rx="60" ry="25" fill="#10b981" stroke="#059669" stroke-width="2"/>
+            <rect x="290" y="200" width="120" height="40" fill="#10b981" stroke="#059669" stroke-width="2"/>
+            <ellipse cx="350" cy="240" rx="60" ry="25" fill="#10b981" stroke="#059669" stroke-width="2"/>
+            <text x="350" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white" font-weight="bold">PLACES</text>
+            <ellipse cx="750" cy="200" rx="60" ry="25" fill="#10b981" stroke="#059669" stroke-width="2"/>
+            <rect x="690" y="200" width="120" height="40" fill="#10b981" stroke="#059669" stroke-width="2"/>
+            <ellipse cx="750" cy="240" rx="60" ry="25" fill="#10b981" stroke="#059669" stroke-width="2"/>
+            <text x="750" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white" font-weight="bold">CONTAINS</text>
+            <ellipse cx="350" cy="550" rx="60" ry="25" fill="#10b981" stroke="#059669" stroke-width="2"/>
+            <rect x="290" y="550" width="120" height="40" fill="#10b981" stroke="#059669" stroke-width="2"/>
+            <ellipse cx="350" cy="590" rx="60" ry="25" fill="#10b981" stroke="#059669" stroke-width="2"/>
+            <text x="350" y="575" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white" font-weight="bold">BOOKS</text>
+            <ellipse cx="750" cy="550" rx="60" ry="25" fill="#10b981" stroke="#059669" stroke-width="2"/>
+            <rect x="690" y="550" width="120" height="40" fill="#10b981" stroke="#059669" stroke-width="2"/>
+            <ellipse cx="750" cy="590" rx="60" ry="25" fill="#10b981" stroke="#059669" stroke-width="2"/>
+            <text x="750" y="575" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white" font-weight="bold">PAYS</text>
+            <line x1="250" y1="190" x2="290" y2="210" stroke="#274b87" stroke-width="2" marker-end="url(#arrow)"/>
+            <text x="270" y="195" font-family="Arial, sans-serif" font-size="10" fill="#dc2626" font-weight="bold">1</text>
+            <line x1="410" y1="210" x2="500" y2="200" stroke="#274b87" stroke-width="2" marker-end="url(#arrowMany)"/>
+            <text x="450" y="200" font-family="Arial, sans-serif" font-size="10" fill="#dc2626" font-weight="bold">N</text>
+            <line x1="700" y1="200" x2="700" y2="200" stroke="#274b87" stroke-width="2"/>
+            <line x1="810" y1="210" x2="950" y2="190" stroke="#274b87" stroke-width="2" marker-end="url(#arrowMany)"/>
+            <text x="880" y="195" font-family="Arial, sans-serif" font-size="10" fill="#dc2626" font-weight="bold">N</text>
+            <line x1="250" y1="540" x2="290" y2="560" stroke="#274b87" stroke-width="2" marker-end="url(#arrow)"/>
+            <text x="270" y="545" font-family="Arial, sans-serif" font-size="10" fill="#dc2626" font-weight="bold">1</text>
+            <line x1="410" y1="560" x2="500" y2="550" stroke="#274b87" stroke-width="2" marker-end="url(#arrowMany)"/>
+            <text x="450" y="550" font-family="Arial, sans-serif" font-size="10" fill="#dc2626" font-weight="bold">N</text>
+            <line x1="950" y1="540" x2="950" y2="540" stroke="#274b87" stroke-width="2"/>
+            <line x1="700" y1="560" x2="700" y2="560" stroke="#274b87" stroke-width="2"/>
+            <line x1="810" y1="560" x2="950" y2="550" stroke="#274b87" stroke-width="2" marker-end="url(#arrow)"/>
+            <text x="880" y="545" font-family="Arial, sans-serif" font-size="10" fill="#dc2626" font-weight="bold">1</text>
+            <text x="880" y="575" font-family="Arial, sans-serif" font-size="10" fill="#dc2626" font-weight="bold">1</text>
+        </svg>
+    </div>
+
+    <div class="diagram-container">
+        <h2>4. DFD Symbols Reference</h2>
+        <svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+            <rect width="800" height="400" fill="#f8fafc"/>
+            <text x="400" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1f2937">DFD Symbols Used in Diagrams</text>
+            <line x1="100" y1="100" x2="280" y2="100" stroke="#274b87" stroke-width="8" marker-end="url(#arrow)"/>
+            <text x="100" y="140" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f2937">Arrow</text>
+            <text x="100" y="165" font-family="Arial, sans-serif" font-size="14" fill="#4b5563">Data Flow / Relationship</text>
+            <ellipse cx="500" cy="110" rx="60" ry="60" fill="#4f79c7" stroke="#274b87" stroke-width="3"/>
+            <text x="500" y="200" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f2937">Circle</text>
+            <text x="500" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#4b5563">Process / Attribute</text>
+            <rect x="80" y="260" width="140" height="100" fill="#4f79c7" stroke="#274b87" stroke-width="3" rx="5"/>
+            <text x="150" y="385" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f2937">Square</text>
+            <text x="150" y="410" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#4b5563">External Entity / Entity</text>
+            <ellipse cx="500" cy="280" rx="70" ry="25" fill="#4f79c7" stroke="#274b87" stroke-width="3"/>
+            <rect x="430" y="280" width="140" height="60" fill="#4f79c7" stroke="#274b87" stroke-width="3"/>
+            <ellipse cx="500" cy="340" rx="70" ry="25" fill="#4f79c7" stroke="#274b87" stroke-width="3"/>
+            <text x="500" y="385" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f2937">Cylinder</text>
+            <text x="500" y="410" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#4b5563">Data Store / Relationship</text>
+        </svg>
+    </div>
+
+</body>
+</html>

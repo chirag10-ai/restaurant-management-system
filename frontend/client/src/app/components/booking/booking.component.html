@@ -1,0 +1,207 @@
+<div class="booking-page">
+  <div class="booking-container">
+    <header class="booking-header">
+      <h1>Table Reservation</h1>
+      <p>Book your table for an unforgettable dining experience</p>
+    </header>
+
+    <div class="booking-form-container">
+      <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()" class="booking-form">
+        <div class="form-section">
+          <h2>Customer Information</h2>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="customerName">Full Name *</label>
+              <input 
+                type="text" 
+                id="customerName" 
+                formControlName="customerName"
+                placeholder="Enter your full name">
+              <div class="error" *ngIf="submitted && f['customerName'].errors">
+                <span *ngIf="f['customerName'].errors?.['required']">Name is required</span>
+                <span *ngIf="f['customerName'].errors?.['minlength']">Name must be at least 2 characters</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="customerEmail">Email Address *</label>
+              <input 
+                type="email" 
+                id="customerEmail" 
+                formControlName="customerEmail"
+                placeholder="your@email.com">
+              <div class="error" *ngIf="submitted && f['customerEmail'].errors">
+                <span *ngIf="f['customerEmail'].errors?.['required']">Email is required</span>
+                <span *ngIf="f['customerEmail'].errors?.['email']">Please enter a valid email</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="customerPhone">Phone Number *</label>
+            <input 
+              type="tel" 
+              id="customerPhone" 
+              formControlName="customerPhone"
+              placeholder="Enter 10-digit mobile number"
+              maxlength="10">
+            <div class="error" *ngIf="(submitted || f['customerPhone'].touched) && f['customerPhone'].errors">
+              <span *ngIf="f['customerPhone'].errors?.['required']">Phone number is required</span>
+              <span *ngIf="f['customerPhone'].errors?.['pattern']">Please enter only 10 digit number (no negative values allowed)</span>
+            </div>
+            <small class="form-hint" *ngIf="!f['customerPhone'].errors && f['customerPhone'].touched">
+              ✓ Valid 10-digit mobile number
+            </small>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2>Reservation Details</h2>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="date">Date *</label>
+              <input 
+                type="date" 
+                id="date" 
+                formControlName="date"
+                (change)="onDateChange()">
+              <div class="error" *ngIf="submitted && f['date'].errors">
+                <span *ngIf="f['date'].errors?.['required']">Date is required</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="time">Time *</label>
+              <select id="time" formControlName="time">
+                <option value="">Select a time slot</option>
+                <option *ngFor="let slot of availableTimeSlots" [value]="slot">
+                  {{ slot }}
+                </option>
+              </select>
+              <div class="info" *ngIf="loadingSlots">
+                Loading available time slots...
+              </div>
+              <div class="error" *ngIf="submitted && f['time'].errors">
+                <span *ngIf="f['time'].errors?.['required']">Please select a time</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="numberOfGuests">Number of Guests *</label>
+              <select id="numberOfGuests" formControlName="numberOfGuests">
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="Family">Family</option>
+                <option value="Group">Group</option>
+              </select>
+              <div class="error" *ngIf="submitted && f['numberOfGuests'].errors">
+                <span *ngIf="f['numberOfGuests'].errors?.['required']">Please select number of guests</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="tableType">Table Preference *</label>
+              <select id="tableType" formControlName="tableType">
+                <option *ngFor="let type of tableTypes" [value]="type.value">
+                  {{ type.label }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group" *ngIf="availableTables.length > 0">
+              <label for="tableNumbers">Select Table(s) * (Hold Ctrl/Cmd to select multiple)</label>
+              <select id="tableNumbers" formControlName="tableNumbers" multiple class="multi-select">
+                <option *ngFor="let table of availableTables" [value]="table">
+                  Table {{ table }}
+                </option>
+              </select>
+              <div class="error" *ngIf="submitted && f['tableNumbers'].errors">
+                <span *ngIf="f['tableNumbers'].errors?.['required'] || f['tableNumbers'].errors?.['minlength']">Please select at least one table</span>
+              </div>
+            </div>
+            <div class="info" *ngIf="loadingTables">
+              Loading available tables...
+            </div>
+            <div class="warning" *ngIf="!loadingTables && availableTables.length === 0 && f['time'].value">
+              No tables available for the selected time and section.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="specialRequests">Special Requests</label>
+            <textarea 
+              id="specialRequests" 
+              formControlName="specialRequests"
+              placeholder="Any special occasions, dietary restrictions, or seating preferences..."
+              rows="3"></textarea>
+          </div>
+            
+          <div class="form-group">
+            <label for="paymentMethod">Payment Method *</label>
+            <select id="paymentMethod" formControlName="paymentMethod">
+              <option *ngFor="let method of paymentMethods" [value]="method.value">
+                {{ method.label }}
+              </option>
+            </select>
+            <div class="error" *ngIf="submitted && f['paymentMethod'].errors">
+              <span *ngIf="f['paymentMethod'].errors?.['required']">Payment method is required</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Selected Menu Items Summary -->
+        <div class="form-section" *ngIf="getCartItems().length > 0">
+          <h2>Selected Menu Items</h2>
+          <div class="cart-summary">
+            <div class="cart-item" *ngFor="let cartItem of getCartItems()">
+              <div class="item-info">
+                <span class="item-name">{{ cartItem.item.name }}</span>
+                <span class="item-qty">×{{ cartItem.quantity }}</span>
+              </div>
+              <div class="item-price">₹{{ (cartItem.item.price * cartItem.quantity) | number:'1.2-2' }}</div>
+            </div>
+            <div class="cart-total">
+              <strong>Total: ₹{{ getCartTotal() | number:'1.2-2' }}</strong>
+            </div>
+          </div>
+        </div>
+    
+        <div class="form-actions">
+          <button 
+            type="submit" 
+            class="btn btn-primary"
+            [disabled]="loading">
+            <span *ngIf="!loading">Confirm Reservation & Pay</span>
+            <span *ngIf="loading">Processing...</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="messages" *ngIf="successMessage || errorMessage">
+      <div class="success-message" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+    </div>
+
+    <div class="booking-info">
+      <h3>Important Information</h3>
+      <ul>
+        <li>Reservations can be made up to 3 days in advance</li>
+        <li>Please arrive within 15 minutes of your reservation time</li>
+        <li>Cancellations must be made at least 2 hours in advance</li>
+        <li>Large groups (8+ guests) may require special arrangements</li>
+        <li>We hold tables for 15 minutes past the reservation time</li>
+      </ul>
+    </div>
+  </div>
+</div>

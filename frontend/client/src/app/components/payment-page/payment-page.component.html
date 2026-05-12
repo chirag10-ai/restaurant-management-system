@@ -1,0 +1,374 @@
+<div class="payment-page-wrapper">
+  <!-- Header Section -->
+  <div class="payment-header">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo-icon">🍽️</div>
+        <h1>Restaurant Pro</h1>
+      </div>
+      <div class="progress-indicator">
+        <div class="step active">
+          <div class="step-number">1</div>
+          <div class="step-label">Booking</div>
+        </div>
+        <div class="step-divider"></div>
+        <div class="step active">
+          <div class="step-number">2</div>
+          <div class="step-label">Payment</div>
+        </div>
+        <div class="step-divider"></div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-label">Confirmation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="payment-container">
+    <div class="payment-content">
+      <!-- Left Panel - Booking Summary -->
+      <div class="booking-summary-panel">
+        <div class="panel-header">
+          <h2>Booking Summary</h2>
+          <div class="booking-id">ID: #{{ bookingId || 'RSV-001' }}</div>
+        </div>
+        
+        <div class="booking-details">
+          <div class="detail-item" *ngIf="bookingData">
+            <div class="detail-label">📅 Date & Time</div>
+            <div class="detail-value">{{ bookingData.date }} at {{ bookingData.time }}</div>
+          </div>
+          
+          <div class="detail-item" *ngIf="bookingData">
+            <div class="detail-label">👥 Guests</div>
+            <div class="detail-value">{{ bookingData.guests }} People</div>
+          </div>
+          
+          <div class="detail-item" *ngIf="bookingData">
+            <div class="detail-label">🪑 Table Type</div>
+            <div class="detail-value">{{ bookingData.tableType }}</div>
+          </div>
+          
+          <!-- Show different billing based on payment type -->
+          <div *ngIf="isOrderOnly(); else bookingBilling">
+            <!-- Order Only Billing -->
+            <div class="detail-item" *ngIf="menuItemsAmount > 0">
+              <div class="detail-label">🛒 Menu Items</div>
+              <div class="detail-value">₹{{ menuItemsAmount | number:'1.2-2' }}</div>
+            </div>
+            
+            <div class="detail-item" *ngIf="menuItemsAmount > 0">
+              <div class="detail-label">💰 Subtotal</div>
+              <div class="detail-value">₹{{ menuItemsAmount | number:'1.2-2' }}</div>
+            </div>
+            
+            <div class="detail-item" *ngIf="menuItemsAmount > 0">
+              <div class="detail-label">💳 Tax (5%)</div>
+              <div class="detail-value">₹{{ calculateTax(menuItemsAmount) | number:'1.2-2' }}</div>
+            </div>
+            
+            <div class="detail-item" *ngIf="menuItemsAmount > 0">
+              <div class="detail-label">🏷️ Total Amount</div>
+              <div class="detail-value">₹{{ menuItemsAmount + calculateTax(menuItemsAmount) | number:'1.2-2' }}</div>
+            </div>
+          </div>
+          
+          <ng-template #bookingBilling>
+            <!-- Booking with Menu Billing -->
+            <!-- Base Booking Amount -->
+            <div class="detail-item" *ngIf="baseAmount > 0">
+              <div class="detail-label">🍽️ Table Booking</div>
+              <div class="detail-value">₹{{ baseAmount | number:'1.2-2' }}</div>
+            </div>
+            
+            <!-- Menu Items Amount -->
+            <div class="detail-item" *ngIf="menuItemsAmount > 0">
+              <div class="detail-label">🛒 Menu Items</div>
+              <div class="detail-value">₹{{ menuItemsAmount | number:'1.2-2' }}</div>
+            </div>
+            
+            <div class="detail-item" *ngIf="baseAmount > 0 || menuItemsAmount > 0">
+              <div class="detail-label">💰 Subtotal</div>
+              <div class="detail-value">₹{{ (baseAmount + menuItemsAmount) | number:'1.2-2' }}</div>
+            </div>
+            
+            <div class="detail-item">
+              <div class="detail-label">💳 Tax (5%)</div>
+              <div class="detail-value">₹{{ calculateTax(baseAmount + menuItemsAmount) | number:'1.2-2' }}</div>
+            </div>
+            
+            <div class="detail-item">
+              <div class="detail-label">🏷️ Total Amount</div>
+              <div class="detail-value">₹{{ getTotalAmount() | number:'1.2-2' }}</div>
+            </div>
+          </ng-template>
+          
+          <!-- Update the total amount display -->
+          <div class="total-amount">
+            <div class="total-label">TOTAL</div>
+            <div class="total-value" *ngIf="isOrderOnly(); else bookingTotal">
+              ₹{{ menuItemsAmount + calculateTax(menuItemsAmount) | number:'1.2-2' }}
+            </div>
+            <ng-template #bookingTotal>
+              ₹{{ getTotalAmount() | number:'1.2-2' }}
+            </ng-template>
+          </div>
+          
+          <div class="divider"></div>
+          
+          <div class="total-amount">
+            <div class="total-label">TOTAL</div>
+            <div class="total-value">₹{{ getTotalAmount() | number:'1.2-2' }}</div>
+          </div>
+        </div>
+        
+        <div class="security-badge">
+          <div class="badge-icon">🔒</div>
+          <div class="badge-text">
+            <strong>100% Secure Payment</strong>
+            <span>Protected by 256-bit SSL Encryption</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel - Payment Form -->
+      <div class="payment-form-panel">
+        <div class="panel-header">
+          <h2>Complete Your Payment</h2>
+          <p>Choose your preferred payment method</p>
+        </div>
+
+        <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()" class="payment-form">
+          <div class="demo-mode-note" *ngIf="demoMode">
+            <small class="form-hint" style="display: block; text-align: center; margin-bottom: 20px; background: #d4edda; color: #155724; padding: 10px; border-radius: 8px;">
+              💳 Demo Mode Active: Any payment details will work - Payment will always succeed!
+            </small>
+          </div>
+          
+
+
+          <!-- Phone Number -->
+          <div class="form-section">
+            <h3>📱 Mobile Number</h3>
+            <div class="form-group">
+              <label>Phone Number *</label>
+              <input 
+                type="tel" 
+                formControlName="phoneNumber"
+                class="form-control"
+                placeholder="Enter 10-digit mobile number"
+                maxlength="10">
+              <div *ngIf="paymentForm.get('phoneNumber')?.invalid && (paymentForm.get('phoneNumber')?.touched || submitted)" 
+                   class="error-message">
+                Please enter only 10 digit number (no negative values allowed)
+              </div>
+              <small class="form-hint" *ngIf="!paymentForm.get('phoneNumber')?.invalid && paymentForm.get('phoneNumber')?.touched">
+                ✓ Valid 10-digit mobile number
+              </small>
+            </div>
+          </div>
+
+          <!-- Payment Method Selection -->
+          <div class="form-section">
+            <h3>💳 Payment Method</h3>
+            <div class="payment-methods">
+              <div class="method-option" 
+                   [class.selected]="selectedPaymentMethod === 'credit_card'"
+                   (click)="paymentForm.get('paymentMethod')?.setValue('credit_card'); onPaymentMethodChange()">
+                <div class="method-icon">💳</div>
+                <div class="method-info">
+                  <div class="method-name">Credit Card</div>
+                  <div class="method-desc">Visa, MasterCard, Rupay</div>
+                </div>
+                <div class="method-check" *ngIf="selectedPaymentMethod === 'credit_card'">✓</div>
+              </div>
+              
+              <div class="method-option" 
+                   [class.selected]="selectedPaymentMethod === 'debit_card'"
+                   (click)="paymentForm.get('paymentMethod')?.setValue('debit_card'); onPaymentMethodChange()">
+                <div class="method-icon">🏦</div>
+                <div class="method-info">
+                  <div class="method-name">Debit Card</div>
+                  <div class="method-desc">All Indian Banks</div>
+                </div>
+                <div class="method-check" *ngIf="selectedPaymentMethod === 'debit_card'">✓</div>
+              </div>
+              
+              <div class="method-option" 
+                   [class.selected]="selectedPaymentMethod === 'upi'"
+                   (click)="paymentForm.get('paymentMethod')?.setValue('upi'); onPaymentMethodChange()">
+                <div class="method-icon">📲</div>
+                <div class="method-info">
+                  <div class="method-name">UPI Payment</div>
+                  <div class="method-desc">Google Pay, PhonePe</div>
+                </div>
+                <div class="method-check" *ngIf="selectedPaymentMethod === 'upi'">✓</div>
+              </div>
+              
+              <div class="method-option" 
+                   [class.selected]="selectedPaymentMethod === 'paytm'"
+                   (click)="paymentForm.get('paymentMethod')?.setValue('paytm'); onPaymentMethodChange()">
+                <div class="method-icon">📱</div>
+                <div class="method-info">
+                  <div class="method-name">PayTM</div>
+                  <div class="method-desc">PayTM UPI & Wallet</div>
+                </div>
+                <div class="method-check" *ngIf="selectedPaymentMethod === 'paytm'">✓</div>
+              </div>
+            </div>
+            
+            <!-- Payment Method Confirmation Message -->
+            <div class="payment-method-confirmation" *ngIf="selectedPaymentMethod">
+              <div class="confirmation-icon">✅</div>
+              <div class="confirmation-text">
+                <strong>{{ getPaymentMethodName(selectedPaymentMethod) }}</strong> selected for payment
+              </div>
+            </div>
+            
+            <div *ngIf="paymentForm.get('paymentMethod')?.invalid && paymentForm.get('paymentMethod')?.touched" 
+                 class="error-message">
+              Please select a payment method
+            </div>
+          </div>
+
+          <!-- Card Details Form -->
+          <div *ngIf="selectedPaymentMethod === 'credit_card' || selectedPaymentMethod === 'debit_card'" 
+               class="form-section card-details-section">
+            <h3>💳 Card Details</h3>
+            <small class="form-hint">Note: Any card details will work in demo mode</small>
+            
+            <div class="form-group">
+              <label>Card Number</label>
+              <input 
+                type="text" 
+                formControlName="cardNumber"
+                class="form-control"
+                placeholder="1234 5678 9012 3456"
+                maxlength="19">
+              <div *ngIf="!demoMode && paymentForm.get('cardNumber')?.invalid && paymentForm.get('cardNumber')?.touched" 
+                   class="error-message">
+                Please enter a valid card number
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Name on Card</label>
+              <input 
+                type="text" 
+                formControlName="cardName"
+                class="form-control"
+                placeholder="John Doe">
+              <div *ngIf="!demoMode && paymentForm.get('cardName')?.invalid && paymentForm.get('cardName')?.touched" 
+                   class="error-message">
+                Please enter cardholder name
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group half-width">
+                <label>Expiry Date</label>
+                <input 
+                  type="date" 
+                  formControlName="expiryDate"
+                  class="form-control">
+                <div *ngIf="!demoMode && paymentForm.get('expiryDate')?.invalid && paymentForm.get('expiryDate')?.touched" 
+                     class="error-message">
+                  Please enter valid expiry date
+                </div>
+              </div>
+              
+              <div class="form-group half-width">
+                <label>CVV</label>
+                <input 
+                  type="password" 
+                  formControlName="cvv"
+                  class="form-control"
+                  placeholder="123"
+                  maxlength="4">
+                <div *ngIf="!demoMode && paymentForm.get('cvv')?.invalid && paymentForm.get('cvv')?.touched" 
+                     class="error-message">
+                  Please enter valid CVV
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- UPI Details Form -->
+          <div *ngIf="selectedPaymentMethod === 'upi'" class="form-section upi-section">
+            <h3>📲 UPI Details</h3>
+            <small class="form-hint">Note: Any UPI ID will work in demo mode</small>
+            <div class="form-group">
+              <label>UPI ID</label>
+              <input 
+                type="text" 
+                formControlName="upiId"
+                class="form-control"
+                placeholder="yourname@upi">
+              <div *ngIf="!demoMode && paymentForm.get('upiId')?.invalid && paymentForm.get('upiId')?.touched" 
+                   class="error-message">
+                Please enter valid UPI ID
+              </div>
+            </div>
+          </div>
+          
+          <!-- PayTM Details Form -->
+          <div *ngIf="selectedPaymentMethod === 'paytm' || selectedPaymentMethod === 'paytm_wallet'" class="form-section paytm-section">
+            <h3>📱 PayTM Details</h3>
+            <small class="form-hint">Note: Any UPI ID or mobile number will work in demo mode</small>
+            <div class="form-group">
+              <label>PayTM Number or UPI ID</label>
+              <input 
+                type="text" 
+                formControlName="upiId"
+                class="form-control"
+                placeholder="Enter mobile number or UPI ID">
+              <div *ngIf="!demoMode && paymentForm.get('upiId')?.invalid && paymentForm.get('upiId')?.touched" 
+                   class="error-message">
+                Please enter valid PayTM number or UPI ID
+              </div>
+            </div>
+          </div>
+
+          <!-- Terms and Conditions -->
+          <div class="terms-section">
+            <label class="checkbox-container">
+              <input type="checkbox" required>
+              <span class="checkmark"></span>
+              I agree to the <a href="#" class="link">Terms & Conditions</a> and 
+              <a href="#" class="link">Privacy Policy</a>
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="submit-section">
+            <button 
+              type="submit" 
+              class="btn btn-primary btn-pay"
+              [disabled]="!paymentForm.valid || processing">
+              <span *ngIf="!processing">✅ Pay ₹{{ getTotalAmount() | number:'1.0-0' }}</span>
+              <span *ngIf="processing">
+                <div class="spinner"></div>
+                Payment Processing...
+              </span>
+            </button>
+            
+
+          </div>
+
+          <!-- Error Message -->
+          <div *ngIf="error" class="alert alert-error">
+            <div class="alert-icon">⚠️</div>
+            <div class="alert-content">{{ error }}</div>
+          </div>
+
+          <!-- Success Message -->
+          <div *ngIf="success" class="alert alert-success">
+            <div class="alert-icon">🎉</div>
+            <div class="alert-content"><strong>Payment Successful!</strong> Your booking is confirmed. Redirecting...</div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

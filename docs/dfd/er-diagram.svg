@@ -1,0 +1,204 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#f8fafc"/>
+  
+  <!-- Title -->
+  <text x="600" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#1f2937">ER Diagram - Restaurant Management System</text>
+  
+  <!-- Arrow Markers -->
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <polygon points="0,0 12,6 0,12" fill="#274b87"/>
+    </marker>
+    <marker id="arrowMany" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <polygon points="0,0 12,6 0,12" fill="#dc2626"/>
+    </marker>
+  </defs>
+  
+  <!-- ========== ENTITIES (Squares) ========== -->
+  
+  <!-- USER Entity -->
+  <rect x="50" y="100" width="200" height="180" fill="#4f79c7" stroke="#274b87" stroke-width="3" rx="10"/>
+  <text x="150" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="white" font-weight="bold">👤 USER</text>
+  <!-- User Attributes (Circles) -->
+  <circle cx="80" cy="155" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="95" y="160" font-family="Arial, sans-serif" font-size="11" fill="white">_id (PK)</text>
+  <circle cx="80" cy="175" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="95" y="180" font-family="Arial, sans-serif" font-size="11" fill="white">name</text>
+  <circle cx="80" cy="195" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="95" y="200" font-family="Arial, sans-serif" font-size="11" fill="white">email</text>
+  <circle cx="80" cy="215" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="95" y="220" font-family="Arial, sans-serif" font-size="11" fill="white">password</text>
+  <circle cx="80" cy="235" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="95" y="240" font-family="Arial, sans-serif" font-size="11" fill="white">role</text>
+  <circle cx="80" cy="255" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="95" y="260" font-family="Arial, sans-serif" font-size="11" fill="white">isActive</text>
+  
+  <!-- MENU Entity -->
+  <rect x="500" y="100" width="200" height="180" fill="#4f79c7" stroke="#274b87" stroke-width="3" rx="10"/>
+  <text x="600" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="white" font-weight="bold">🍽️ MENU</text>
+  <!-- Menu Attributes -->
+  <circle cx="530" cy="155" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="545" y="160" font-family="Arial, sans-serif" font-size="11" fill="white">_id (PK)</text>
+  <circle cx="530" cy="175" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="545" y="180" font-family="Arial, sans-serif" font-size="11" fill="white">name</text>
+  <circle cx="530" cy="195" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="545" y="200" font-family="Arial, sans-serif" font-size="11" fill="white">description</text>
+  <circle cx="530" cy="215" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="545" y="220" font-family="Arial, sans-serif" font-size="11" fill="white">price</text>
+  <circle cx="530" cy="235" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="545" y="240" font-family="Arial, sans-serif" font-size="11" fill="white">image</text>
+  <circle cx="530" cy="255" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="545" y="260" font-family="Arial, sans-serif" font-size="11" fill="white">isAvailable</text>
+  
+  <!-- ORDER Entity -->
+  <rect x="950" y="100" width="200" height="200" fill="#4f79c7" stroke="#274b87" stroke-width="3" rx="10"/>
+  <text x="1050" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="white" font-weight="bold">📋 ORDER</text>
+  <!-- Order Attributes -->
+  <circle cx="980" cy="155" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="995" y="160" font-family="Arial, sans-serif" font-size="11" fill="white">_id (PK)</text>
+  <circle cx="980" cy="175" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="995" y="180" font-family="Arial, sans-serif" font-size="11" fill="white">userId (FK)</text>
+  <circle cx="980" cy="195" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="995" y="200" font-family="Arial, sans-serif" font-size="11" fill="white">items[]</text>
+  <circle cx="980" cy="215" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="995" y="220" font-family="Arial, sans-serif" font-size="11" fill="white">totalPrice</text>
+  <circle cx="980" cy="235" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="995" y="240" font-family="Arial, sans-serif" font-size="11" fill="white">status</text>
+  <circle cx="980" cy="255" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="995" y="260" font-family="Arial, sans-serif" font-size="11" fill="white">tableNumber</text>
+  <circle cx="980" cy="275" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="995" y="280" font-family="Arial, sans-serif" font-size="11" fill="white">notes</text>
+  
+  <!-- BOOKING Entity -->
+  <rect x="50" y="450" width="200" height="220" fill="#4f79c7" stroke="#274b87" stroke-width="3" rx="10"/>
+  <text x="150" y="480" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="white" font-weight="bold">📅 BOOKING</text>
+  <!-- Booking Attributes -->
+  <circle cx="80" cy="505" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="95" y="510" font-family="Arial, sans-serif" font-size="11" fill="white">_id (PK)</text>
+  <circle cx="80" cy="525" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="95" y="530" font-family="Arial, sans-serif" font-size="11" fill="white">customerName</text>
+  <circle cx="80" cy="545" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="95" y="550" font-family="Arial, sans-serif" font-size="11" fill="white">customerEmail</text>
+  <circle cx="80" cy="565" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="95" y="570" font-family="Arial, sans-serif" font-size="11" fill="white">customerPhone</text>
+  <circle cx="80" cy="585" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="95" y="590" font-family="Arial, sans-serif" font-size="11" fill="white">date/time</text>
+  <circle cx="80" cy="605" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="95" y="610" font-family="Arial, sans-serif" font-size="11" fill="white">guests</text>
+  <circle cx="80" cy="625" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="95" y="630" font-family="Arial, sans-serif" font-size="11" fill="white">tableNumbers[]</text>
+  <circle cx="80" cy="645" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="95" y="650" font-family="Arial, sans-serif" font-size="11" fill="white">status</text>
+  
+  <!-- PAYMENT Entity -->
+  <rect x="500" y="450" width="200" height="200" fill="#4f79c7" stroke="#274b87" stroke-width="3" rx="10"/>
+  <text x="600" y="480" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="white" font-weight="bold">💳 PAYMENT</text>
+  <!-- Payment Attributes -->
+  <circle cx="530" cy="505" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="545" y="510" font-family="Arial, sans-serif" font-size="11" fill="white">_id (PK)</text>
+  <circle cx="530" cy="525" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="545" y="530" font-family="Arial, sans-serif" font-size="11" fill="white">orderId (FK)</text>
+  <circle cx="530" cy="545" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="545" y="550" font-family="Arial, sans-serif" font-size="11" fill="white">userId (FK)</text>
+  <circle cx="530" cy="565" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="545" y="570" font-family="Arial, sans-serif" font-size="11" fill="white">amount</text>
+  <circle cx="530" cy="585" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="545" y="590" font-family="Arial, sans-serif" font-size="11" fill="white">paymentMethod</text>
+  <circle cx="530" cy="605" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="545" y="610" font-family="Arial, sans-serif" font-size="11" fill="white">paymentStatus</text>
+  <circle cx="530" cy="625" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="545" y="630" font-family="Arial, sans-serif" font-size="11" fill="white">transactionId</text>
+  
+  <!-- CONTACT Entity -->
+  <rect x="950" y="450" width="200" height="140" fill="#4f79c7" stroke="#274b87" stroke-width="3" rx="10"/>
+  <text x="1050" y="480" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="white" font-weight="bold">📧 CONTACT</text>
+  <!-- Contact Attributes -->
+  <circle cx="980" cy="505" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="995" y="510" font-family="Arial, sans-serif" font-size="11" fill="white">_id (PK)</text>
+  <circle cx="980" cy="525" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="995" y="530" font-family="Arial, sans-serif" font-size="11" fill="white">name</text>
+  <circle cx="980" cy="545" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="995" y="550" font-family="Arial, sans-serif" font-size="11" fill="white">email</text>
+  <circle cx="980" cy="565" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="995" y="570" font-family="Arial, sans-serif" font-size="11" fill="white">message</text>
+  
+  <!-- ========== RELATIONSHIPS (Cylinders) ========== -->
+  
+  <!-- User-Order Relationship -->
+  <ellipse cx="350" cy="200" rx="60" ry="25" fill="#10b981" stroke="#059669" stroke-width="2"/>
+  <rect x="290" y="200" width="120" height="40" fill="#10b981" stroke="#059669" stroke-width="2"/>
+  <ellipse cx="350" cy="240" rx="60" ry="25" fill="#10b981" stroke="#059669" stroke-width="2"/>
+  <text x="350" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white" font-weight="bold">PLACES</text>
+  
+  <!-- Order-Menu Relationship -->
+  <ellipse cx="750" cy="200" rx="60" ry="25" fill="#10b981" stroke="#059669" stroke-width="2"/>
+  <rect x="690" y="200" width="120" height="40" fill="#10b981" stroke="#059669" stroke-width="2"/>
+  <ellipse cx="750" cy="240" rx="60" ry="25" fill="#10b981" stroke="#059669" stroke-width="2"/>
+  <text x="750" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white" font-weight="bold">CONTAINS</text>
+  
+  <!-- User-Booking Relationship -->
+  <ellipse cx="350" cy="550" rx="60" ry="25" fill="#10b981" stroke="#059669" stroke-width="2"/>
+  <rect x="290" y="550" width="120" height="40" fill="#10b981" stroke="#059669" stroke-width="2"/>
+  <ellipse cx="350" cy="590" rx="60" ry="25" fill="#10b981" stroke="#059669" stroke-width="2"/>
+  <text x="350" y="575" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white" font-weight="bold">BOOKS</text>
+  
+  <!-- Order-Payment Relationship -->
+  <ellipse cx="750" cy="550" rx="60" ry="25" fill="#10b981" stroke="#059669" stroke-width="2"/>
+  <rect x="690" y="550" width="120" height="40" fill="#10b981" stroke="#059669" stroke-width="2"/>
+  <ellipse cx="750" cy="590" rx="60" ry="25" fill="#10b981" stroke="#059669" stroke-width="2"/>
+  <text x="750" y="575" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white" font-weight="bold">PAYS</text>
+  
+  <!-- ========== RELATIONSHIP LINES ========== -->
+  
+  <!-- User -> Places -> Order -->
+  <line x1="250" y1="190" x2="290" y2="210" stroke="#274b87" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="270" y="195" font-family="Arial, sans-serif" font-size="10" fill="#dc2626" font-weight="bold">1</text>
+  <line x1="410" y1="210" x2="500" y2="200" stroke="#274b87" stroke-width="2" marker-end="url(#arrowMany)"/>
+  <text x="450" y="200" font-family="Arial, sans-serif" font-size="10" fill="#dc2626" font-weight="bold">N</text>
+  
+  <!-- Order -> Contains -> Menu -->
+  <line x1="700" y1="200" x2="700" y2="200" stroke="#274b87" stroke-width="2"/>
+  <line x1="810" y1="210" x2="950" y2="190" stroke="#274b87" stroke-width="2" marker-end="url(#arrowMany)"/>
+  <text x="880" y="195" font-family="Arial, sans-serif" font-size="10" fill="#dc2626" font-weight="bold">N</text>
+  
+  <!-- User -> Books -> Booking -->
+  <line x1="250" y1="540" x2="290" y2="560" stroke="#274b87" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="270" y="545" font-family="Arial, sans-serif" font-size="10" fill="#dc2626" font-weight="bold">1</text>
+  <line x1="410" y1="560" x2="500" y2="550" stroke="#274b87" stroke-width="2" marker-end="url(#arrowMany)"/>
+  <text x="450" y="550" font-family="Arial, sans-serif" font-size="10" fill="#dc2626" font-weight="bold">N</text>
+  
+  <!-- Order -> Pays -> Payment -->
+  <line x1="950" y1="540" x2="950" y2="540" stroke="#274b87" stroke-width="2"/>
+  <line x1="700" y1="560" x2="700" y2="560" stroke="#274b87" stroke-width="2"/>
+  <line x1="810" y1="560" x2="950" y2="550" stroke="#274b87" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="880" y="545" font-family="Arial, sans-serif" font-size="10" fill="#dc2626" font-weight="bold">1</text>
+  <text x="880" y="575" font-family="Arial, sans-serif" font-size="10" fill="#dc2626" font-weight="bold">1</text>
+  
+  <!-- Legend -->
+  <rect x="50" y="720" width="350" height="150" fill="white" stroke="#274b87" stroke-width="2" rx="10"/>
+  <text x="225" y="750" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f2937">📋 Legend</text>
+  
+  <rect x="70" y="765" width="40" height="25" fill="#4f79c7" stroke="#274b87" stroke-width="2" rx="5"/>
+  <text x="120" y="783" font-family="Arial, sans-serif" font-size="12" fill="#1f2937">Entity (Square)</text>
+  
+  <ellipse cx="90" cy="820" rx="20" ry="10" fill="#10b981" stroke="#059669" stroke-width="2"/>
+  <rect x="70" y="820" width="40" height="15" fill="#10b981" stroke="#059669" stroke-width="2"/>
+  <ellipse cx="90" cy="835" rx="20" ry="10" fill="#10b981" stroke="#059669" stroke-width="2"/>
+  <text x="120" y="830" font-family="Arial, sans-serif" font-size="12" fill="#1f2937">Relationship (Cylinder)</text>
+  
+  <circle cx="250" cy="778" r="8" fill="#93bbfc" stroke="#274b87" stroke-width="2"/>
+  <text x="270" y="783" font-family="Arial, sans-serif" font-size="12" fill="#1f2937">Attribute (Circle)</text>
+  
+  <line x1="230" y1="820" x2="260" y2="820" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowMany)"/>
+  <text x="270" y="825" font-family="Arial, sans-serif" font-size="12" fill="#1f2937">1:N Relationship</text>
+  
+  <!-- Cardinality Notes -->
+  <rect x="450" y="720" width="700" height="150" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" rx="10"/>
+  <text x="800" y="750" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#92400e">🔗 Relationships</text>
+  <text x="470" y="775" font-family="Arial, sans-serif" font-size="12" fill="#78350f">• User 1:N Order (One user can place many orders)</text>
+  <text x="470" y="795" font-family="Arial, sans-serif" font-size="12" fill="#78350f">• Order N:M Menu (One order has many menu items)</text>
+  <text x="470" y="815" font-family="Arial, sans-serif" font-size="12" fill="#78350f">• User 1:N Booking (One user can make many bookings)</text>
+  <text x="470" y="835" font-family="Arial, sans-serif" font-size="12" fill="#78350f">• Order 1:1 Payment (One order has one payment)</text>
+  <text x="470" y="855" font-family="Arial, sans-serif" font-size="12" fill="#78350f">• PK = Primary Key | FK = Foreign Key</text>
+</svg>

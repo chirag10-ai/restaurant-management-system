@@ -1,0 +1,110 @@
+[
+  {
+    "_id": "69d3b1a5b28f48c8b5f695aa",
+    "name": "chow mein",
+    "description": "A hot bowl of chow mein is being lifted with chopsticks, with steam rising to show it’s freshly cooked.\r\nThe noodles are mixed with colorful vegetables and coated in a rich sauce.\r\nThe dark background makes the dish look even more tasty and appealing.",
+    "price": 299,
+    "image": "/uploads/image-1775481253715-720665469.jpeg",
+    "isAvailable": true,
+    "ingredients": [],
+    "createdAt": "2026-04-06T13:14:13.729Z",
+    "updatedAt": "2026-04-06T13:14:13.729Z",
+    "__v": 0
+  },
+  {
+    "_id": "69d3b387b28f48c8b5f695ca",
+    "name": "rose milk",
+    "description": "A refreshing glass of rose milk is beautifully presented with a soft pink color.\r\nIt is garnished with pistachio pieces and a fresh rose, giving it an elegant look.\r\nThe creamy texture and delicate decoration make it look both tasty and soothing.",
+    "price": 100,
+    "image": "/uploads/image-1775481735102-761876832.jpeg",
+    "isAvailable": true,
+    "ingredients": [],
+    "createdAt": "2026-04-06T13:22:15.112Z",
+    "updatedAt": "2026-04-06T13:22:15.112Z",
+    "__v": 0
+  },
+  {
+    "_id": "69d3b3fab28f48c8b5f695ce",
+    "name": "manchurian",
+    "description": "A plate of crispy manchurian is coated in a rich, glossy sauce.\r\nIt is garnished with fresh spring onions, adding color and flavor.\r\nThe dish looks spicy, flavorful, and perfect for a delicious meal.",
+    "price": 249,
+    "image": "/uploads/image-1775481850830-59669332.jpeg",
+    "isAvailable": true,
+    "ingredients": [],
+    "createdAt": "2026-04-06T13:24:10.837Z",
+    "updatedAt": "2026-04-06T13:24:36.322Z",
+    "__v": 0
+  },
+  {
+    "_id": "69d3b46bb28f48c8b5f695e3",
+    "name": "momo",
+    "description": "A plate of golden fried momo is neatly arranged in a circle.\r\nThey are served with a flavorful dipping sauce placed in the center.\r\nThe crispy texture and warm color make them look crunchy and delicious.",
+    "price": 349,
+    "image": "/uploads/image-1775481963566-728516753.jpeg",
+    "isAvailable": true,
+    "ingredients": [],
+    "createdAt": "2026-04-06T13:26:03.570Z",
+    "updatedAt": "2026-04-06T13:26:03.570Z",
+    "__v": 0
+  },
+  {
+    "_id": "69d3b4c9b28f48c8b5f695e7",
+    "name": "pani puri",
+    "description": "A plate of crispy pani puri is beautifully arranged around a bowl of spicy tangy water.\r\nEach puri is filled with potatoes, chickpeas, and fresh toppings like onions and coriander.\r\nThe colorful presentation makes this popular street food look fresh and tempting.",
+    "price": 100,
+    "image": "/uploads/image-1775482057426-24524415.jpeg",
+    "isAvailable": true,
+    "ingredients": [],
+    "createdAt": "2026-04-06T13:27:37.429Z",
+    "updatedAt": "2026-04-06T13:27:42.381Z",
+    "__v": 0
+  },
+  {
+    "_id": "69d3b63bb28f48c8b5f695ed",
+    "name": "cold coco milkshake",
+    "description": "A refreshing cold coco milkshake served in elegant glasses, topped with creamy foam and chocolate shavings.\r\nIts rich, smooth texture and chilled chocolate flavor make it a perfect treat for hot days.",
+    "price": 200,
+    "image": "/uploads/image-1775482427040-225855889.jpeg",
+    "isAvailable": true,
+    "ingredients": [],
+    "createdAt": "2026-04-06T13:33:47.046Z",
+    "updatedAt": "2026-04-06T13:33:51.083Z",
+    "__v": 0
+  },
+  {
+    "_id": "69d3b681b28f48c8b5f695f3",
+    "name": "burger",
+    "description": "A juicy double cheeseburger stacked with melted cheese, fresh lettuce, tomatoes, and onions in a sesame bun.\r\nSteam rising from the patty highlights its hot, freshly cooked and mouthwatering appeal.",
+    "price": 300,
+    "image": "/uploads/image-1775482497790-540874566.jpeg",
+    "isAvailable": true,
+    "ingredients": [],
+    "createdAt": "2026-04-06T13:34:57.797Z",
+    "updatedAt": "2026-04-06T13:35:01.427Z",
+    "__v": 0
+  },
+  {
+    "_id": "69d3b6d6b28f48c8b5f695f9",
+    "name": "pasta tossed",
+    "description": "A creamy penne pasta tossed in a rich, cheesy white sauce and garnished with fresh herbs.\r\nServed with crispy garlic bread, it looks warm, comforting, and full of flavor.",
+    "price": 400,
+    "image": "/uploads/image-1775482582445-379955748.jpeg",
+    "isAvailable": true,
+    "ingredients": [],
+    "createdAt": "2026-04-06T13:36:22.450Z",
+    "updatedAt": "2026-04-06T13:36:26.429Z",
+    "__v": 0
+  },
+  {
+    "_id": "69d3b71fb28f48c8b5f695ff",
+    "name": "pizza",
+    "description": "A hot, cheesy pizza with melted mozzarella stretching as a slice is lifted.\r\nTopped with fresh veggies, it looks irresistibly gooey and delicious.",
+    "price": 500,
+    "image": "/uploads/image-1775482655936-626411592.jpeg",
+    "isAvailable": true,
+    "ingredients": [],
+    "createdAt": "2026-04-06T13:37:35.941Z",
+    "updatedAt": "2026-04-06T13:37:39.270Z",
+    "__v": 0
+  }
+]

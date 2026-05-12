@@ -1,0 +1,72 @@
+<div class="payment-confirmation-wrapper">
+  <!-- Header Section -->
+  <div class="confirmation-header">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo-icon">🍽️</div>
+        <h1>Restaurant Pro</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="confirmation-container">
+    <div class="confirmation-content">
+      <!-- Success Icon -->
+      <div class="success-icon">
+        <div class="icon-circle">
+          <span class="icon">✅</span>
+        </div>
+      </div>
+
+      <!-- Confirmation Message -->
+      <div class="confirmation-message">
+        <h2>Payment Confirmed!</h2>
+        <p *ngIf="!isOrderOnly(); else orderOnlyMessage">Your {{ getPaymentMethodDisplay(method) }} payment has been successfully processed.</p>
+        <ng-template #orderOnlyMessage>
+          <p>Your {{ getPaymentMethodDisplay(method) }} payment for order has been successfully processed.</p>
+        </ng-template>
+      </div>
+
+      <!-- Payment Details -->
+      <div class="payment-details">
+        <div class="detail-card">
+          <div class="detail-row">
+            <span class="label">Payment ID:</span>
+            <span class="value">{{ paymentId }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Booking ID:</span>
+            <span class="value">{{ bookingId }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Amount:</span>
+            <span class="value">₹{{ amount | number:'1.2-2' }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Method:</span>
+            <span class="value">{{ getPaymentMethodDisplay(method) }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Status:</span>
+            <span class="value status-success">{{ status }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Gateway Specific Info -->
+      <div class="payment-gateway-info" *ngIf="showGatewayInfo()">
+        <div class="info-card" [class.paytm-style]="method.toLowerCase().includes('paytm')">
+          <h3>{{ getGatewayTitle(method) }}</h3>
+          <p>Transaction ID: {{ transactionId }}</p>
+          <p>{{ getGatewaySecurityMessage(method) }}</p>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="btn btn-primary" (click)="viewBooking()">{{ isOrderOnly() ? 'View Order Details' : 'View Booking Details' }}</button>
+        <button class="btn btn-secondary" (click)="backToHome()">Back to Home</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,571 @@
+.revenue-page {
+  padding: 2rem;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.revenue-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 1rem;
+}
+
+.revenue-header h1 {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.revenue-header p {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  margin: 0.5rem 0 0;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.error {
+  text-align: center;
+  padding: 2rem;
+  color: #e74c3c;
+  background: #fadbd8;
+  border-radius: 8px;
+  margin: 1rem;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.summary-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.summary-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.summary-card h3 {
+  margin: 0 0 1rem 0;
+  color: #7f8c8d;
+  font-size: 1rem;
+}
+
+.summary-card .amount {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #27ae60;
+  margin: 0;
+}
+
+.breakdown-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.breakdown-section h2 {
+  color: #2c3e50;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.breakdown-charts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.chart-card {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.chart-card h3 {
+  margin: 0 0 1rem 0;
+  color: #2c3e50;
+}
+
+.category-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.category-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.2rem;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.category-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  border-color: #3498db;
+}
+
+.category-item.active {
+  border-left: 5px solid #3498db;
+  background-color: #f0f7ff;
+}
+
+.customer-info-cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.customer-info-cell strong {
+  color: #2c3e50;
+  font-size: 0.95rem;
+}
+
+.customer-info-cell small {
+  color: #7f8c8d;
+  font-size: 0.8rem;
+}
+
+.items-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-clear-filter {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-clear-filter:hover {
+  background-color: #2980b9;
+}
+
+.no-data-cell {
+  text-align: center;
+  padding: 2rem !important;
+  color: #7f8c8d;
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+.booking-info-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.booking-time-item, .booking-guests-item, .booking-table-item {
+  font-size: 0.85rem;
+  color: #34495e;
+  white-space: nowrap;
+}
+
+.booking-time-item {
+  font-weight: 500;
+}
+
+.item-tag {
+  background-color: #f1f8e9;
+  color: #388e3c;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  border: 1px solid #c5e1a5;
+}
+
+.transactions-details-section {
+  margin-top: 2rem;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.category-name {
+  font-weight: 500;
+  color: #34495e;
+}
+
+.category-amount {
+  font-weight: bold;
+  color: #27ae60;
+}
+
+.detailed-transactions-section, .detailed-payments-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Expandable Sections */
+.expandable-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.section-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.section-header {
+  padding: 1.25rem;
+  background: #f8f9fa;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.section-header:hover {
+  background: #e9ecef;
+}
+
+.section-header h2 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.25rem;
+}
+
+.expand-icon {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #6c757d;
+}
+
+.section-content {
+  padding: 1.5rem;
+}
+
+/* Chart Styles */
+.chart-container {
+  width: 100%;
+  min-height: 350px;
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+
+.bar-chart {
+  width: 100%;
+  min-width: 600px;
+  height: 300px;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  background: white;
+}
+
+.bar {
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.bar:hover {
+  opacity: 0.8;
+}
+
+.axis-label {
+  fill: #6c757d;
+  font-family: Arial, sans-serif;
+}
+
+.chart-placeholder {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.chart-data-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .chart-container {
+    min-height: 500px;
+  }
+  
+  .bar-chart {
+    min-width: 100%;
+  }
+  
+  .chart-data-mobile {
+    display: block;
+    margin-top: 2rem;
+  }
+  
+  .chart-data-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.chart-data {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.day-info, .month-info {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.25rem;
+}
+
+.month-breakdown {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-top: 0.25rem;
+}
+
+.day-bar-container, .month-bar-container {
+  width: 100%;
+  height: 20px;
+  background: #e9ecef;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.day-bar, .month-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+  min-width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+  color: white;
+  font-size: 0.8rem;
+}
+
+/* Payment Methods and Top Customers */
+.payment-methods-list, .customers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.method-item, .customer-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #eee;
+}
+
+.method-name, .customer-name {
+  font-weight: 500;
+  color: #34495e;
+}
+
+.method-stats, .customer-stats {
+  display: flex;
+  gap: 1rem;
+}
+
+.bookings-count {
+  color: #3498db;
+  font-weight: normal;
+}
+
+.method-count, .method-revenue, .orders-count, .total-spent {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.method-revenue, .total-spent {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.revenue-transactions-section h2 {
+  color: #2c3e50;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.transactions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #f8f9fa;
+}
+
+.transaction-info {
+  flex: 1;
+}
+
+.transaction-id {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.transaction-date {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.transaction-details {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.transaction-amount {
+  font-weight: bold;
+  color: #27ae60;
+  min-width: 100px;
+}
+
+.transaction-type {
+  background: #e8f4fc;
+  color: #3498db;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+.transaction-status {
+  background: #e8f5e9;
+  color: #27ae60;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+
+/* Table Styles */
+.transactions-table-container {
+  overflow-x: auto;
+}
+
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.transactions-table th,
+.transactions-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.transactions-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.transactions-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.transactions-table .status-completed {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.transactions-table .status-pending {
+  color: #f39c12;
+  font-weight: bold;
+}
+
+.transactions-table .status-failed {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.transactions-table .status-refunded {
+  color: #3498db;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .revenue-page {
+    padding: 1rem;
+  }
+  
+  .revenue-header h1 {
+    font-size: 2rem;
+  }
+  
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .transaction-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .transaction-details {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .transactions-table {
+    font-size: 0.85rem;
+  }
+  
+  .transactions-table th,
+  .transactions-table td {
+    padding: 0.5rem;
+  }
+}

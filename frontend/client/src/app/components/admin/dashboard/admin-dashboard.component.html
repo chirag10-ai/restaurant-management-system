@@ -1,0 +1,89 @@
+<div class="dashboard-container">
+  <h2>Dashboard Overview</h2>
+  
+  <div class="stats-grid">
+    <div class="stat-card clickable-card" (click)="navigateToUsers()">
+      <h3>Total Users</h3>
+      <p class="stat-value">{{ stats.totalUsers }}</p>
+      <div class="stat-icon users-icon">👥</div>
+      <div class="card-overlay">
+        <span>Click to view user details</span>
+      </div>
+    </div>
+    
+
+    
+    <div class="stat-card clickable-card" (click)="navigateToBookings()">
+      <h3>Pending Bookings</h3>
+      <p class="stat-value">{{ stats.pendingOrders }}</p>
+      <div class="stat-icon pending-icon">⏳</div>
+      <div class="card-overlay">
+        <span>Click to view booking details</span>
+      </div>
+    </div>
+    
+    <div class="stat-card clickable-card" (click)="navigateToRevenue()">
+      <h3> Revenue</h3>
+      <p class="stat-value">${{ stats.revenue }}</p>
+      <div class="stat-icon revenue-icon">💰</div>
+      <div class="card-overlay">
+        <span>Click to view revenue details</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="recent-sections">
+    
+    <div class="recent-users">
+      <h2>Recent Users</h2>
+      <table class="users-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of recentUsers">
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td><span class="role-badge" [class]="getUserRoleClass(user.role)">{{ user.role }}</span></td>
+            <td>{{ user.createdAt | date:'shortDate' }}</td>
+            <td>
+              <button class="btn-delete" (click)="deleteUser(user._id || user.id)" title="Delete User">❌</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- Pending Bookings Section -->
+  <div class="pending-bookings-section" *ngIf="pendingBookings.length > 0">
+    <h2>Pending Bookings</h2>
+    <div class="bookings-grid">
+      <div class="booking-card" *ngFor="let booking of pendingBookings">
+        <div class="booking-header">
+          <h3>{{ booking.customerName }}</h3>
+          <span class="booking-status pending">Pending</span>
+        </div>
+        <div class="booking-details">
+          <p><strong>Email:</strong> {{ booking.customerEmail }}</p>
+          <p><strong>Phone:</strong> {{ booking.customerPhone }}</p>
+          <p><strong>Date:</strong> {{ booking.date | date:'mediumDate' }}</p>
+          <p><strong>Time:</strong> {{ booking.time }}</p>
+          <p><strong>Guests:</strong> {{ booking.numberOfGuests }}</p>
+          <p><strong>Table Type:</strong> {{ booking.tableType }}</p>
+          <p *ngIf="booking.specialRequests"><strong>Special Requests:</strong> {{ booking.specialRequests }}</p>
+        </div>
+        <div class="booking-actions" *ngIf="booking._id">
+          <button class="btn-confirm" (click)="confirmBooking(booking._id)">Confirm</button>
+          <button class="btn-reject" (click)="rejectBooking(booking._id)">Reject</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

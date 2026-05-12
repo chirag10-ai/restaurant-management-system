@@ -1,0 +1,81 @@
+<div class="register-container">
+  <div class="register-form">
+    <h2>Register</h2>
+    
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Full Name:</label>
+        <input 
+          type="text" 
+          id="name" 
+          formControlName="name" 
+          placeholder="Enter your full name"
+          [disabled]="loading">
+        <div class="error" *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">
+          Name is required and must be at least 2 characters
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input 
+          type="email" 
+          id="email" 
+          formControlName="email" 
+          placeholder="Enter your email"
+          [disabled]="loading">
+        <div class="error" *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched">
+          Email is required.
+        </div>
+        <div class="error" *ngIf="registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched">
+          Email must be a valid email address.
+        </div>
+        <div class="error" *ngIf="registerForm.get('email')?.hasError('lowercase') && registerForm.get('email')?.touched">
+          {{ registerForm.get('email')?.getError('lowercase') }}
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input 
+          type="password" 
+          id="password" 
+          formControlName="password" 
+          placeholder="Enter your password"
+          [disabled]="loading">
+        <div class="error" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+          Password is required and must be at least 6 characters
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password:</label>
+        <input 
+          type="password" 
+          id="confirmPassword" 
+          formControlName="confirmPassword" 
+          placeholder="Confirm your password"
+          [disabled]="loading">
+        <div class="error" *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
+          Please confirm your password
+        </div>
+        <div class="error" *ngIf="registerForm.errors?.['passwordMismatch'] && registerForm.get('confirmPassword')?.touched">
+          Passwords do not match
+        </div>
+      </div>
+      
+      <!-- Role selection hidden - default to customer -->
+      <input type="hidden" formControlName="role" value="customer">
+      
+      <div class="error" *ngIf="error">{{ error }}</div>
+      
+      <button type="submit" [disabled]="loading || registerForm.invalid">
+        {{ loading ? 'Registering...' : 'Register' }}
+      </button>
+    </form>
+    
+    <p>
+      Already have an account? <a routerLink="/login">Login here</a>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,277 @@
+<div class="revenue-page">
+  <header class="revenue-header">
+    <h1>Revenue Dashboard</h1>
+    <p>Track all payments and revenue streams</p>
+  </header>
+
+  <div class="loading" *ngIf="loading">
+    Loading revenue data...
+  </div>
+
+  <div class="error" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <div class="revenue-content" *ngIf="!loading && !error">
+    <!-- Revenue Summary Cards -->
+    <div class="summary-cards" *ngIf="revenueSummary">
+      <div class="summary-card" (click)="expandAllSections()" style="cursor: pointer;" title="Click to expand all revenue details">
+        <h3>Total Revenue</h3>
+        <p class="amount">{{ formatCurrency(revenueSummary.totalRevenue) }}</p>
+      </div>
+      
+      <div class="summary-card" (click)="expandSectionByCard('orders')" style="cursor: pointer;" title="Click to expand order details">
+        <h3>Total Orders</h3>
+        <p class="amount">{{ revenueSummary.totalOrders }}</p>
+      </div>
+      
+      <div class="summary-card" (click)="expandSectionByCard('bookings')" style="cursor: pointer;" title="Click to expand booking details">
+        <h3>Total Bookings</h3>
+        <p class="amount">{{ revenueSummary.totalBookings }}</p>
+      </div>
+      
+      <div class="summary-card" (click)="expandSectionByCard('avgValue')" style="cursor: pointer;" title="Click to expand average value details">
+        <h3>Avg. Order Value</h3>
+        <p class="amount">{{ formatCurrency(revenueSummary.averageOrderValue) }}</p>
+      </div>
+      
+      <!-- Growth Rate if available -->
+      <div class="summary-card" *ngIf="revenueSummary?.revenueGrowth">
+        <h3>Growth Rate</h3>
+        <p class="amount">{{ revenueSummary!.revenueGrowth!.growthPercentage | number:'1.1-1' }}%</p>
+      </div>
+    </div>
+
+    <!-- Revenue by Category Section -->
+    <div class="section-card" *ngIf="revenueSummary?.revenueByCategory">
+      <div class="section-header" (click)="toggleSection('revenueByCategory')">
+        <h2>Revenue by Category</h2>
+        <span class="expand-icon">{{ expandedSections.revenueByCategory ? '−' : '+' }}</span>
+      </div>
+      <div class="section-content" *ngIf="expandedSections.revenueByCategory">
+        <div class="category-breakdown">
+          <div class="category-item" [class.active]="selectedCategory === 'booking'" (click)="selectCategory('booking')">
+            <div class="category-name">Table Booking</div>
+            <div class="category-amount">{{ formatCurrency(revenueSummary?.revenueByCategory?.tableBooking || 0) }}</div>
+          </div>
+          <div class="category-item" [class.active]="selectedCategory === 'menuItems'" (click)="selectCategory('menuItems')">
+            <div class="category-name">Total Orders</div>
+            <div class="category-amount">{{ formatCurrency(revenueSummary?.revenueByCategory?.menuItems || 0) }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Expandable Revenue Sections -->
+    <div class="expandable-sections">
+      <!-- Daily Revenue Chart -->
+      <div class="section-card">
+        <div class="section-header" (click)="toggleSection('dailyRevenue')">
+          <h2>Daily Revenue</h2>
+          <span class="expand-icon">{{ expandedSections.dailyRevenue ? '−' : '+' }}</span>
+        </div>
+        <div class="section-content" *ngIf="expandedSections.dailyRevenue">
+          <div class="chart-container">
+            <svg class="bar-chart" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid meet">
+              <!-- Bars -->
+              <ng-container *ngIf="revenueSummary && revenueSummary.dailyRevenue && revenueSummary.dailyRevenue.length > 0">
+                <rect 
+                  *ngFor="let day of revenueSummary?.dailyRevenue; let i = index" 
+                  class="bar" 
+                  [attr.x]="revenueSummary ? calculateBarPosition(i) : 0"
+                  [attr.y]="revenueSummary ? calculateBarYPosition(day.revenue, revenueSummary.dailyRevenue) : 0"
+                  [attr.width]="revenueSummary ? calculateBarWidth() : 0"
+                  [attr.height]="revenueSummary ? calculateBarHeight(day.revenue, revenueSummary.dailyRevenue) : 0"
+                  [attr.fill]="revenueSummary ? getBarColor(i) : '#ccc'"
+                  [attr.data-value]="revenueSummary ? formatCurrency(day.revenue) : '0'">
+                  <title>{{ day.date }}: {{ formatCurrency(day.revenue) }}</title>
+                </rect>
+                
+                <!-- X-axis labels -->
+                <ng-container *ngFor="let day of revenueSummary?.dailyRevenue; let i = index">
+                  <text 
+                    *ngIf="i % 5 === 0 || i === (revenueSummary?.dailyRevenue?.length || 0) - 1"
+                    class="axis-label"
+                    [attr.x]="revenueSummary ? calculateBarPosition(i) + calculateBarWidth()/2 : 0"
+                    [attr.y]="280"
+                    text-anchor="middle"
+                    font-size="10">
+                    {{ formatShortDate(day.date) }}
+                  </text>
+                </ng-container>
+                
+                <!-- Y-axis labels -->
+                <text class="axis-label" x="10" y="20" text-anchor="start" font-size="12">{{ revenueSummary ? getMaxRevenueLabel() : '0' }}</text>
+                <text class="axis-label" x="10" y="150" text-anchor="start" font-size="12">{{ revenueSummary ? getMidRevenueLabel() : '0' }}</text>
+                <text class="axis-label" x="10" y="280" text-anchor="start" font-size="12">0</text>
+              </ng-container>
+              
+              <!-- Y-axis line -->
+              <line x1="50" y1="20" x2="50" y2="270" stroke="#ccc" stroke-width="1" />
+              
+              <!-- X-axis line -->
+              <line x1="50" y1="270" x2="780" y2="270" stroke="#ccc" stroke-width="1" />
+            </svg>
+            
+            <!-- Alternative text representation for small screens -->
+            <div class="chart-data-mobile" *ngIf="revenueSummary?.dailyRevenue">
+              <div class="chart-data-item" *ngFor="let day of revenueSummary?.dailyRevenue">
+                <div class="day-info">
+                  <div class="day-label">{{ day.date }}</div>
+                  <div class="day-amount">{{ formatCurrency(day.revenue) }}</div>
+                </div>
+                <div class="day-bar-container">
+                  <div class="day-bar" [style.width.%]="revenueSummary ? calculateDailyBarWidth(day.revenue) : 0"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Monthly Revenue Chart -->
+      <div class="section-card" *ngIf="revenueSummary?.monthlyRevenue">
+        <div class="section-header" (click)="toggleSection('monthlyRevenue')">
+          <h2>Monthly Revenue</h2>
+          <span class="expand-icon">{{ expandedSections.monthlyRevenue ? '−' : '+' }}</span>
+        </div>
+        <div class="section-content" *ngIf="expandedSections.monthlyRevenue && revenueSummary!.monthlyRevenue && revenueSummary!.monthlyRevenue.length > 0">
+          <div class="chart-placeholder">
+            <div class="chart-data" *ngFor="let month of revenueSummary!.monthlyRevenue">
+              <div class="month-info">
+                <div class="month-label">{{ month.month }}</div>
+                <div class="month-amount">{{ formatCurrency(month.revenue) }}</div>
+                <!-- Show breakdown if available -->
+                <div class="month-breakdown" *ngIf="month.breakdown">
+                  <small>Orders: {{ formatCurrency(month.breakdown.menuItems) }}, Booking: {{ formatCurrency(month.breakdown.tableBooking) }}</small>
+                </div>
+              </div>
+              <div class="month-bar-container">
+                <div class="month-bar" [style.width.%]="calculateMonthlyBarWidth(month.revenue)"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Payment Methods -->
+      <div class="section-card" *ngIf="revenueSummary?.paymentMethods">
+        <div class="section-header" (click)="toggleSection('paymentMethods')">
+          <h2>Payment Methods</h2>
+          <span class="expand-icon">{{ expandedSections.paymentMethods ? '−' : '+' }}</span>
+        </div>
+        <div class="section-content" *ngIf="expandedSections.paymentMethods && revenueSummary!.paymentMethods && revenueSummary!.paymentMethods.length > 0">
+          <div class="payment-methods-list">
+            <div class="method-item" *ngFor="let method of revenueSummary!.paymentMethods">
+              <div class="method-name">{{ method.method }}</div>
+              <div class="method-stats">
+                <span class="method-count">{{ method.count }} orders</span>
+                <span class="method-revenue">{{ formatCurrency(method.revenue) }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Top Customers -->
+      <div class="section-card" *ngIf="revenueSummary?.topCustomers">
+        <div class="section-header" (click)="toggleSection('topCustomers')">
+          <h2>Top Customers</h2>
+          <span class="expand-icon">{{ expandedSections.topCustomers ? '−' : '+' }}</span>
+        </div>
+        <div class="section-content" *ngIf="expandedSections.topCustomers && revenueSummary!.topCustomers && revenueSummary!.topCustomers.length > 0">
+          <div class="customers-list">
+            <div class="customer-item" *ngFor="let customer of revenueSummary!.topCustomers">
+              <div class="customer-name">{{ customer.customerName }}</div>
+              <div class="customer-stats">
+                <span class="orders-count">{{ customer.orderCount }} orders</span>
+                <span class="bookings-count" *ngIf="customer.bookingCount > 0">{{ customer.bookingCount }} bookings</span>
+                <span class="total-spent">{{ formatCurrency(customer.totalSpent) }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Details Section -->
+    <div class="transactions-details-section">
+      <div class="section-card">
+        <div class="section-header" (click)="toggleSection('transactions')" style="cursor: pointer;">
+          <h2>
+            <span *ngIf="selectedCategory === 'all'">Recent Transactions</span>
+            <span *ngIf="selectedCategory === 'booking'">Booking Details</span>
+            <span *ngIf="selectedCategory === 'menuItems'">Total Orders Details</span>
+          </h2>
+          <div class="header-actions">
+            <span class="expand-icon">{{ expandedSections.transactions ? '−' : '+' }}</span>
+          </div>
+        </div>
+        <div class="section-content" *ngIf="expandedSections.transactions">
+          <div class="transactions-table-container">
+            <table class="transactions-table">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Transaction ID</th>
+                  <th>Date</th>
+                  <th>Customer</th>
+                  <th>Amount</th>
+                  <th *ngIf="selectedCategory === 'menuItems' || selectedCategory === 'all'">Items/Details</th>
+                  <th *ngIf="selectedCategory === 'booking' || selectedCategory === 'all'">Booking Info</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let transaction of filteredTransactions">
+                  <td>{{ getTransactionType(transaction) }}</td>
+                  <td>{{ getTransactionId(transaction) }}</td>
+                  <td>{{ formatDate(transaction.createdAt!) }}</td>
+                  <td>
+                    <div class="customer-info-cell">
+                      <strong>{{ transaction.userDetails?.name || 'N/A' }}</strong>
+                      <small>{{ transaction.userDetails?.email }}</small>
+                    </div>
+                  </td>
+                  <td>{{ formatCurrency(transaction.amount) }}</td>
+                  
+                  <!-- Items column for Menu Items category or All -->
+                  <td *ngIf="selectedCategory === 'menuItems' || selectedCategory === 'all'">
+                    <div *ngIf="transaction.type === 'payment'">
+                      <div class="items-list" *ngIf="transaction.orderDetails?.items && transaction.orderDetails!.items!.length > 0">
+                        <div class="item-tag" *ngFor="let item of transaction.orderDetails!.items">
+                          {{ item.name }} (x{{ item.quantity }})
+                        </div>
+                      </div>
+                      <span *ngIf="!transaction.orderDetails?.items || transaction.orderDetails!.items!.length === 0">No items listed</span>
+                    </div>
+                    <span *ngIf="transaction.type === 'booking'">-</span>
+                  </td>
+                  
+                  <!-- Booking info for Booking category or All -->
+                  <td *ngIf="selectedCategory === 'booking' || selectedCategory === 'all'">
+                    <div *ngIf="transaction.type === 'booking'">
+                      <div class="booking-info-cell" *ngIf="transaction.orderDetails?.bookingDate">
+                        <div class="booking-time-item">📅 {{ transaction.orderDetails!.bookingDate | date:'mediumDate' }}</div>
+                        <div class="booking-time-item">⏰ {{ transaction.orderDetails!.bookingTime }}</div>
+                        <div class="booking-guests-item">👥 {{ transaction.orderDetails!.numberOfGuests }} Guests</div>
+                        <div class="booking-table-item">🪑 {{ transaction.orderDetails!.tableType | titlecase }} Table</div>
+                      </div>
+                      <span *ngIf="!transaction.orderDetails?.bookingDate">No booking details</span>
+                    </div>
+                    <span *ngIf="transaction.type === 'payment'">-</span>
+                  </td>
+                  
+                  <td [ngClass]="'status-' + transaction.paymentStatus">{{ transaction.paymentStatus }}</td>
+                </tr>
+                <tr *ngIf="filteredTransactions.length === 0">
+                  <td colspan="8" class="no-data-cell">No transactions found.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

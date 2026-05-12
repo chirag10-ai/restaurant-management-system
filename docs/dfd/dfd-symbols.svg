@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <defs>
+    <style>
+      .title { font: 700 30px Arial, sans-serif; fill: #1f2937; }
+      .label { font: 700 22px Arial, sans-serif; fill: #111827; }
+      .text { font: 18px Arial, sans-serif; fill: #374151; }
+      .shape { fill: #4f79c7; stroke: #274b87; stroke-width: 3; }
+      .line { stroke: #274b87; stroke-width: 10; fill: none; }
+      .small { font: 16px Arial, sans-serif; fill: #4b5563; }
+    </style>
+    <marker id="arrowHead" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <polygon points="0,0 12,6 0,12" fill="#274b87" />
+    </marker>
+  </defs>
+
+  <rect width="1200" height="700" fill="#f8fafc" />
+  <text x="600" y="55" text-anchor="middle" class="title">DFD Symbols</text>
+
+  <line x1="120" y1="170" x2="360" y2="170" class="line" marker-end="url(#arrowHead)" />
+  <text x="120" y="230" class="label">Arrow</text>
+  <text x="120" y="260" class="text">Data Flow</text>
+  <text x="120" y="290" class="small">Shows movement of data between components</text>
+
+  <ellipse cx="850" cy="170" rx="95" ry="95" class="shape" />
+  <text x="850" y="300" text-anchor="middle" class="label">Circle</text>
+  <text x="850" y="330" text-anchor="middle" class="text">Process</text>
+  <text x="850" y="360" text-anchor="middle" class="small">Transforms input data into output</text>
+
+  <rect x="110" y="420" width="220" height="150" class="shape" />
+  <text x="220" y="610" text-anchor="middle" class="label">Square</text>
+  <text x="220" y="640" text-anchor="middle" class="text">External Entity</text>
+
+  <ellipse cx="850" cy="430" rx="120" ry="35" class="shape" />
+  <rect x="730" y="430" width="240" height="110" class="shape" />
+  <ellipse cx="850" cy="540" rx="120" ry="35" class="shape" />
+  <text x="850" y="610" text-anchor="middle" class="label">Cylinder</text>
+  <text x="850" y="640" text-anchor="middle" class="text">Data Store</text>
+</svg>
